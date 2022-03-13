@@ -1,8 +1,11 @@
-import React from "react";
-import { Button } from "@material-ui/core";
-import { useFormikContext } from "formik";
+import React from 'react';
+import { Button } from '@material-ui/core';
+import { useFormikContext } from 'formik';
 
-const ButtonWrapper = ({children, ...otherProps}) => {
+const ButtonWrapper = ({
+    children,
+     ...otherProps
+    }) => {
 
     const { submitForm } = useFormikContext();
 
@@ -20,7 +23,9 @@ const ButtonWrapper = ({children, ...otherProps}) => {
     return (
         <Button
             {...configButton}
-        />
+        >
+           {children}
+        </Button>
     );
 }
 
