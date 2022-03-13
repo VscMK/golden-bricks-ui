@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import { Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import TextFieldWrapper from '../../../../components/form-components/TextField';
+import Button from '../../../../components/form-components/Button';
+import ButtonWrapper from '../../../../components/form-components/Button';
 
 function LoginForm() {
 
@@ -15,6 +17,8 @@ function LoginForm() {
     },
   }))
 
+  const classes = useStyles();
+
    const INITIAL_VALUES = {
     email: "",
     username: "",
@@ -22,15 +26,16 @@ function LoginForm() {
 }
 
   const FORM_VALIDATION = Yup.object().shape({
-    email: Yup.string().required('Please enter your email.'),
+    email: Yup.string().email('Invalid email address.').required('Please enter your email.'),
     username: Yup.string().required('Please enter your username.'),
-    password: Yup.string().email('Invalid email address.').required('Please enter your password.'),
+    password: Yup.string().required('Please enter your password.'),
   })
 
   return (
     <Grid container>
     <Grid item xs={12}>
       <Container maxWidth="md">
+        {/* <div className={classes.formWrapper}> */}
         <Formik
           initialValues={{
             ...INITIAL_VALUES
@@ -42,7 +47,7 @@ function LoginForm() {
             >
           
           <Form>
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
               <Grid item xs={12}>
                 <Typography >
                   Enter your credentials:
@@ -61,9 +66,15 @@ function LoginForm() {
                 name='password'
                 label={'Password:'} />
               </Grid>
+              <Grid item xs={12}>
+                <ButtonWrapper>
+                  Submit form
+                </ButtonWrapper>
+              </Grid>
             </Grid>
           </Form>
         </Formik>
+        {/* </div> */}
       </Container>
     </Grid>
    </Grid>
