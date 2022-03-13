@@ -1,10 +1,10 @@
 import React from 'react';
-import { Form, useFormik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Grid from '@material-ui/core/Grid';
 import { Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { Formik } from 'formik';
+import TextFieldWrapper from '../../../../components/form-components';
 
 function LoginForm() {
 
@@ -15,22 +15,6 @@ function LoginForm() {
     },
   }))
 
-   const formik = useFormik({
-       initialValues: {
-           email: "",
-           username: "",
-           password: ""
-       },
-       validationSchema: Yup.object({
-        firstName: Yup.string().max(40, 'Must be 40 characters or less.')
-        .required("Required"),
-
-       }),
-       onSubmit: (values) => {
-        console.log('VALUES: ', values);
-       }
-   });
-
    const INITIAL_VALUES = {
     email: "",
     username: "",
@@ -38,10 +22,10 @@ function LoginForm() {
 }
 
   const FORM_VALIDATION = Yup.object().shape({
-
+    email: Yup.string().required('Please enter your email.'),
+    username: Yup.string().required('Please enter your username.'),
+    password: Yup.string().email('Invalid email address.').required('Please enter your password.'),
   })
-
-   console.log('ERR:: ', formik.errors);
 
   return (
     <Grid container>
@@ -60,15 +44,22 @@ function LoginForm() {
           <Form>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography>
-                  Email
+                <Typography >
+                  Enter your credentials:
                 </Typography>
-                <Typography>
-                  Username
-                </Typography>
-                <Typography>
-                  Password
-                </Typography>
+                <TextFieldWrapper 
+                name='email'
+                label={'Email:'} />
+              </Grid>
+              <Grid item xs={12}>
+                <TextFieldWrapper 
+                name='username'
+                label={'Username:'} />
+              </Grid>
+              <Grid item xs={12}>
+                <TextFieldWrapper 
+                name='password'
+                label={'Password:'} />
               </Grid>
             </Grid>
           </Form>
