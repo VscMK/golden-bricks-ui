@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import Grid from '@material-ui/core/Grid';
 import { Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import TextFieldWrapper from '../../../../components/form-components';
+import TextFieldWrapper from '../../../../components/form-components/TextField';
 
 function LoginForm() {
 
