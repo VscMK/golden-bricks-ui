@@ -8,7 +8,7 @@ const TextFieldWrapper = () => {
     }
 
     return (
-        <TextField />
+        <TextField {...configTextField} />
     );
 }
 
