@@ -8,7 +8,7 @@ const getUserBoard = () => {
 };
 
 const getAdminObserverBoard = () => {
-  return axios.get(API_URL + "admin-observator", { headers: authHeader() });
+  return axios.get(API_URL + "admin-observer", { headers: authHeader() });
 };
 
 const getAdminBoard = () => {
