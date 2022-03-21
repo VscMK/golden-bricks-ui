@@ -9,10 +9,11 @@ const register = (username, email, password) => {
     password,
   });
 };
-const login = (username, password) => {
+const login = (email, password) => {
+    console.log('STIGNA :: ', email, password);
   return axios
     .post(API_URL + 'login', {
-      username,
+      email,
       password,
     })
     .then((response) => {
