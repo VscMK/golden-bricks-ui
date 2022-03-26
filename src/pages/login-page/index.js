@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import LoginForm from './components/login-form/LoginForm';
-import { Grid } from '@material-ui/core';
+import LoginForm from './components/login-form';
+import { Button, Grid } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
 
 const LoginPage = () => {
     // const styles = {
@@ -21,6 +22,11 @@ const LoginPage = () => {
         <div className="center-form">
             <LoginForm />
         </div>
+        <NavLink to={'/register'}>
+          <Button>
+            Register
+          </Button>
+        </NavLink>
     </Grid>
   )
 }
