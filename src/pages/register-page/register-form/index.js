@@ -41,8 +41,6 @@ const RegisterForm = (props) => {
     lastName: "",
     email: "",
     password: "",
-    // role_id: 2,
-    // team_id: 1,
 };
 
 const VALIDATION_SCHEMA = Yup.object().shape({
@@ -90,7 +88,7 @@ const papa = (formValue) => {
             >
           <Form>
             <Grid container spacing={1}>
-            <Typography >
+            <Typography variant='h4' component='h2' gutterBottom>
                   Enter your credentials to register:
                 </Typography>
               <Grid item xs={12}>

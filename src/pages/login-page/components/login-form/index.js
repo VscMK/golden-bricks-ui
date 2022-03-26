@@ -83,7 +83,7 @@ const handleLogin = (formValue) => {
           <Form>
             <Grid container spacing={1}>
               <Grid item xs={12}>
-                <Typography >
+                <Typography variant='h4' component='h2' gutterBottom>
                   Enter your credentials to login:
                 </Typography>
                 <TextFieldWrapper 
