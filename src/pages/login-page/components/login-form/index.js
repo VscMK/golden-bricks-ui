@@ -6,7 +6,7 @@ import { Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import TextFieldWrapper from '../../../../components/form-components/TextField';
 import ButtonWrapper from '../../../../components/form-components/Button';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../../slices/authSlice/authSlice';
 import { clearMessage } from '../../../../slices/messageSlice/messageSlice';
@@ -50,6 +50,7 @@ const VALIDATION_SCHEMA = Yup.object().shape({
 });
 
 const handleLogin = (formValue) => {
+  console.log('HANDLE LOGIN ::: ', formValue);
   const { email, password } = formValue;
   setLoading(true);
   dispatch(login({ email, password }))
@@ -63,9 +64,9 @@ const handleLogin = (formValue) => {
     });
 };
 
-if (isLoggedIn) {
-  return <Link to='/profile' />;
-}
+// if (isLoggedIn) {
+//   return <Link to='/profile' />;
+// }
 
   return (
     <Grid container>
@@ -90,11 +91,6 @@ if (isLoggedIn) {
                 label={'Email:'} 
                 />
               </Grid>
-              {/* <Grid item xs={12}>
-                <TextFieldWrapper 
-                name='username'
-                label={'Username:'}                />
-              </Grid> */}
               <Grid item xs={12}>
                 <TextFieldWrapper 
                 type='password'
