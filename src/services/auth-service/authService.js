@@ -2,15 +2,17 @@ import axios from "axios";
 
 const API_URL = 'http://localhost:8081/users/';
 
-const register = (username, email, password) => {
+const register = (firstName, lastName, email, password, role_id, team_id) => {
   return axios.post(API_URL + 'register', {
-    username,
+    firstName,
+    lastName,
     email,
     password,
+    role_id,
+    team_id
   });
 };
 const login = (email, password) => {
-    console.log('STIGNA :: ', email, password);
   return axios
     .post(API_URL + 'login', {
       email,
