@@ -23,21 +23,9 @@ const LoginForm = (props) => {
     dispatch(clearMessage());
   }, [dispatch]);
 
-  const useStyles = makeStyles(() => ({
-    // formWrapper: {
-    //   marginTop: theme.spacing(5),
-    //   marginBottom: theme.spacing(8),
-    // },
-    btn: {
-      fontSize: '50px',
-    },
-  }))
-
-  const classes = useStyles();
 
    const INITIAL_VALUES = {
     email: "",
-    // username: "",
     password: ""
 }
 
@@ -45,12 +33,10 @@ const VALIDATION_SCHEMA = Yup.object().shape({
   email: Yup.string()
     .email("Email is invalidd")
     .required("Email is required"),
-  // username: Yup.string().required("Username is required"),
   password: Yup.string().required("Password is required")
 });
 
 const handleLogin = (formValue) => {
-  console.log('HANDLE LOGIN ::: ', formValue);
   const { email, password } = formValue;
   setLoading(true);
   dispatch(login({ email, password }))
@@ -99,7 +85,7 @@ const handleLogin = (formValue) => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <ButtonWrapper className={classes.btn} disabled={loading}>
+                <ButtonWrapper disabled={loading}>
                 {loading ? (
                   <span className="spinner-border spinner-border-sm"></span>
                 ) : 'Login'}
