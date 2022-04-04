@@ -20,7 +20,7 @@ const Header = () => {
            <AppBar className={classes.toolbar}>
                <Toolbar>
                    <Typography>
-                   <Box sx={{ fontWeight: 'bold', m: 1, letterSpacing: 4}}>
+                   <Box sx={{ fontWeight: 'bold', m: 1, letterSpacing: 5}}>
                        GOLDEN BRICKS
                    </Box>
                    </Typography>
