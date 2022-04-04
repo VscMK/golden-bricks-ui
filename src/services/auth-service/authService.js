@@ -3,9 +3,11 @@ import axios from "axios";
 const API_URL = 'http://localhost:8081/users/';
 
 const register = (firstName, lastName, email, password, role_id, team_id) => {
+  const first_name = firstName;
+  const last_name = lastName;
   return axios.post(API_URL + 'register', {
-    firstName,
-    lastName,
+    first_name,
+    last_name,
     email,
     password,
     role_id,
