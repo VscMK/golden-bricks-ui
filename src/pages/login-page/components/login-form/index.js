@@ -3,7 +3,6 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Grid from '@material-ui/core/Grid';
 import { Container, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core';
 import TextFieldWrapper from '../../../../components/form-components/TextField';
 import ButtonWrapper from '../../../../components/form-components/Button';
 // import { Link } from "react-router-dom";
@@ -58,7 +57,6 @@ const handleLogin = (formValue) => {
     <Grid container>
     <Grid item xs={12}>
       <Container maxWidth="md">
-        <div className={classes.formWrapper}>
         <Formik
           initialValues={{
             ...INITIAL_VALUES
@@ -85,7 +83,7 @@ const handleLogin = (formValue) => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <ButtonWrapper disabled={loading}>
+                <ButtonWrapper disabled={loading} >
                 {loading ? (
                   <span className="spinner-border spinner-border-sm"></span>
                 ) : 'Login'}
@@ -94,7 +92,6 @@ const handleLogin = (formValue) => {
             </Grid>
           </Form>
         </Formik>
-        </div>
       </Container>
     </Grid>
    </Grid>
