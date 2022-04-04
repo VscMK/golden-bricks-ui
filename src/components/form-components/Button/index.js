@@ -16,22 +16,26 @@ const ButtonWrapper = ({
 
     const configButton = {
         variant: 'contained',
-        color: 'primary',
         fullWidth: true,
+        color: 'inherit',
         onClick: handleSubmit,
     }
     
     const useStyles = makeStyles({
         btn: {
           fontSize: 30,
-          backgroungColor: 'yellow',
+          backgroundColor: '#f8b133',
+          color: 'rgba(0,0,0,.87)',
+          '&:hover': {
+            background: '#f8b133',
+        },
         }
       });
 
       const classes = useStyles();
 
     return (
-        <Button className={classes.btn}
+        <Button className={classes.btn} disableElevation
             {...configButton}
         >
            {children}

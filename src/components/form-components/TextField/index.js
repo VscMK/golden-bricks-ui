@@ -18,7 +18,8 @@ const TextfieldWrapper = ({
   const useStyles = makeStyles({
     textField: {
       height: '70px',
-      margin0bottom: '10px'
+      margin0bottom: '10px',
+      color: '#f8b133'
     }
   });
 
