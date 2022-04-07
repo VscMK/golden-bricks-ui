@@ -9,6 +9,7 @@ import ButtonWrapper from '../../../../components/form-components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../../slices/authSlice/authSlice';
 import { clearMessage } from '../../../../slices/messageSlice/messageSlice';
+import { WelcomeText } from '../../../../components/WelcomeText';
 // import { clearMessage } from '../../../../slices/messageSlice/messageSlice';
 
 const LoginForm = (props) => {
@@ -67,9 +68,12 @@ const handleLogin = (formValue) => {
           <Form>
             <Grid container spacing={1}>
               <Grid item xs={12}>
-                <Typography variant='h4' component='h2' gutterBottom>
+                <WelcomeText />
+                <Typography variant='h4' component='h2' gutterBottom >
                   Enter your credentials to login:
                 </Typography>
+              </Grid>
+              <Grid item xs={12}>
                 <TextFieldWrapper 
                 name='email'
                 label={'Email:'} 
