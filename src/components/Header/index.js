@@ -3,7 +3,6 @@ import { AppBar, Typography, Toolbar, Box, Tabs, Tab, Button} from '@material-ui
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { makeStyles } from '@material-ui/core';
 
-
 const Header = () => {
     
     const [selectedTab, setSelectedTab] = useState();
@@ -30,11 +29,12 @@ const Header = () => {
                        GOLDEN BRICKS
                    </Box>
                    </Typography>
-                   <Tabs value={selectedTab} 
+                   <Tabs value={selectedTab}
+                   centered
                    indicatorColor='primary'
                    onChange={(e, value) => setSelectedTab(value)}
                    >
-                     <Tab label='AIRPAYS'/>
+                     <Tab label='AIRPAYS' href="/airpays-page" />
                      <Tab label='USERS'/>
                      <Tab label='INSPECTIONS'/>
                    </Tabs>
