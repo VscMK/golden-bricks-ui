@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { AppBar, Typography, Toolbar, Box, Tabs, Tab} from '@material-ui/core';
+import { AppBar, Typography, Toolbar, Box, Tabs, Tab, Button} from '@material-ui/core';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { makeStyles } from '@material-ui/core';
+
 
 const Header = () => {
     
@@ -12,12 +13,16 @@ const Header = () => {
           backgroundColor: '#f8b133',
           color: 'rgba(0,0,0,.87)',
         },
+        root: {
+            display: 'flex',
+        },
       });
     const classes = useStyles();
     
     
     return (
-       <React.Fragment>
+        <div style={{display: 'flex'}}>
+           {/* <DrawerComponent openDrawer={openDrawer} /> */}
            <AppBar className={classes.toolbar}>
                <Toolbar>
                    <Typography>
@@ -36,7 +41,7 @@ const Header = () => {
                    <PowerSettingsNewIcon fontSize='large'sx={{ fontSize: 40, marginLeft: 'auto' }} />
                </Toolbar>
            </AppBar>
-       </React.Fragment>
+           </div>
     );
 };
 
