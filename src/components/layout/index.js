@@ -1,11 +1,12 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core';
+import Header from '../Header';
 
 function LayoutWrapper({ children }) {
 
     const useStyles = makeStyles({
         pageWrapper: {
-            width: '100%'
+            width: '80%'
         }
     })    
     const classes = useStyles();
@@ -13,6 +14,7 @@ function LayoutWrapper({ children }) {
     return (
     <div>
         <div className={classes.pageWrapper}>
+          <Header />
           {children}
         </div>
     </div>
