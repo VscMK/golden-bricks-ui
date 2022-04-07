@@ -1,7 +1,10 @@
-import React from 'react'
-import { Drawer, List, makeStyles } from '@material-ui/core';
+import React, { useState } from 'react'
+import { Drawer, List, ListItemIcon, ListItemText, makeStyles, Button } from '@material-ui/core';
+import MenuIcon from '@mui/icons-material/Menu';
 
 function DrawerComponent() {
+
+    const [openDrawer, setOpenDrawer] = useState(false);
 
     const useStyles = makeStyles({
         drawer: {
@@ -15,14 +18,36 @@ function DrawerComponent() {
     const classes = useStyles();
 
   return (
-    <Drawer className={classes.drawer}
-    variant='permanent'
-    anchor='left'
-    classes={{ paper: classes.drawerPaper}}
-    >
-        <List>
-        </List>
-    </Drawer>
+      <div>
+        <Drawer className={classes.drawer}
+        // variant='temrary'
+        open = {openDrawer}
+        onClose={() => setOpenDrawer(openDrawer)}
+        anchor='left'
+        classes={{ paper: classes.drawerPaper}}
+        >
+          <List>
+            <ListItemIcon>
+              <ListItemText>
+                AIRPAYS
+              </ListItemText>
+            </ListItemIcon>
+            <ListItemIcon>
+              <ListItemText>
+                USERS
+              </ListItemText>
+            </ListItemIcon>
+            <ListItemIcon>
+              <ListItemText>
+                INSPECTIONS
+              </ListItemText>
+            </ListItemIcon>
+          </List>
+        </Drawer>
+        <Button onClick={() => setOpenDrawer(!openDrawer)}>
+            <MenuIcon />
+        </Button>
+    </div>
   )
 }
 
