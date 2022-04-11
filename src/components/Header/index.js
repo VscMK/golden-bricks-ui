@@ -22,7 +22,7 @@ const Header = () => {
     return (
         <div style={{display: 'flex'}}>
            {/* <DrawerComponent openDrawer={openDrawer} /> */}
-           <AppBar className={classes.toolbar}>
+           <AppBar className={classes.toolbar} position='absolute'>
                <Toolbar>
                    <Typography>
                    <Box sx={{ fontWeight: 'bold', m: 1, letterSpacing: 5}}>
