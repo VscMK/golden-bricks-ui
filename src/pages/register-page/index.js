@@ -2,6 +2,7 @@ import React from 'react';
 import RegisterForm from './register-form';
 import { Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
+import Header from '../../components/Header/'
 
 const RegisterPage = () => {
   const useStyles = makeStyles ({
@@ -21,6 +22,7 @@ const RegisterPage = () => {
 
   return (
     <Container >
+      <Header />
       <Grid className={classes.centerLoginForm}>
         <div className="center-form">
           <RegisterForm />
