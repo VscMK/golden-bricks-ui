@@ -4,6 +4,9 @@ import RegisterPage from './pages/register-page';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AdminPage from './pages/admin-page';
 import AirpaysPage from './pages/airpays-page';
+import UsersPage from './pages/users-page';
+import InspectionsPage from './pages/inspections-page';
+import Profile from './components/profile';
 
 function App() {
   return (
@@ -13,6 +16,9 @@ function App() {
         <Route path='/register' element={<RegisterPage/>} />
         <Route path='/admin-page' element={<AdminPage />} />
         <Route path='/airpays-page' element={<AirpaysPage />} />
+        <Route path='/users-page' element={<UsersPage />} />
+        <Route path='/inspections-page' element={<InspectionsPage />} />
+        <Route path='/profile' element={<Profile />} />
         {/* <div className="App">
         < LoginPage />
         </div> */}
