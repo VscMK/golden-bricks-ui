@@ -5,12 +5,11 @@ import Grid from '@material-ui/core/Grid';
 import { Container, Typography } from '@material-ui/core';
 import TextFieldWrapper from '../../../../components/form-components/TextField';
 import ButtonWrapper from '../../../../components/form-components/Button';
-// import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../../slices/authSlice/authSlice';
 import { clearMessage } from '../../../../slices/messageSlice/messageSlice';
 import { WelcomeText } from '../../../../components/WelcomeText';
-// import { clearMessage } from '../../../../slices/messageSlice/messageSlice';
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = (props) => {
 
@@ -22,6 +21,14 @@ const LoginForm = (props) => {
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
+
+  let navigate = useNavigate();
+
+useEffect(() => {
+  if (isLoggedIn) {
+      return navigate('/profile');
+   }
+},[isLoggedIn]);
 
 
    const INITIAL_VALUES = {
@@ -49,10 +56,6 @@ const handleLogin = (formValue) => {
       setLoading(false);
     });
 };
-
-// if (isLoggedIn) {
-//   return <Link to='/profile' />;
-// }
 
   return (
     <Grid container>
