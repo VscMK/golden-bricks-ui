@@ -1,5 +1,5 @@
 import axios from "axios";
-import authHeader from "./auth-header";
+import authHeader from "../auth-header/authHeader";
 
 const API_URL = 'http://localhost:8081/'
 
@@ -26,7 +26,7 @@ const getBeekeepersCoordinatorBoard = () => {
     return axios.get(API_URL + 'beekeepers-coordinator', {headers: authHeader()});
 }
 
-const userService = {
+const UserService = {
   getBeekeeperBoard,
   getUserBoard,
   getAdminObserverBoard,
@@ -34,4 +34,4 @@ const userService = {
   getBeekeepersCoordinatorBoard,
   getAllUsers,
 };
-export default userService;
+export default UserService;
