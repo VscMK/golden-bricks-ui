@@ -65,7 +65,6 @@ const papa = (formValue) => {
       window.location.reload();
     })
     .catch(() => {
-      console.log('VLEZE TUKA VO CATCH:: ');
       setLoading(false);
     });
 };
@@ -89,7 +88,7 @@ const papa = (formValue) => {
           <Form>
             <Grid container spacing={1}>
             <Typography variant='h4' component='h2' gutterBottom>
-                  Enter your credentials to register:
+                  Add new user:
                 </Typography>
               <Grid item xs={12}>
                 <TextFieldWrapper 
