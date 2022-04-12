@@ -25,10 +25,6 @@ const RegisterForm = (props) => {
   }, [dispatch]);
 
   const useStyles = makeStyles(() => ({
-    // formWrapper: {
-    //   marginTop: theme.spacing(5),
-    //   marginBottom: theme.spacing(8),
-    // },
     btn: {
       fontSize: '50px',
     },
@@ -68,10 +64,6 @@ const papa = (formValue) => {
       setLoading(false);
     });
 };
-
-// if (isLoggedIn) {
-//   return <Link to='/profile' />;
-// }
 
   return (
     <Grid container>
@@ -117,7 +109,7 @@ const papa = (formValue) => {
                 <ButtonWrapper className={classes.btn} disabled={loading}>
                 {loading ? (
                   <span className="spinner-border spinner-border-sm"></span>
-                ) : 'Register'}
+                ) : 'Add user'}
                 </ButtonWrapper>
               </Grid>
             </Grid>
