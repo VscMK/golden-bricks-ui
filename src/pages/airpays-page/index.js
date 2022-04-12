@@ -7,6 +7,7 @@ import AirpayService from '../../services/airpay-service/airpayService';
 function AirpaysPage() {
 
   const [airpays, setAirpays] = useState([]);
+  
   useEffect(() => {
     AirpayService.getAirpays().then(
       (response) => {
