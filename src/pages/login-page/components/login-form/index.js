@@ -17,13 +17,13 @@ const LoginForm = (props) => {
   const { isLoggedIn } = useSelector((state => state.auth));
   const { message } = useSelector((state => state.message));
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
 
-  let navigate = useNavigate();
-
+  
 useEffect(() => {
   if (isLoggedIn) {
       return navigate('/profile');
