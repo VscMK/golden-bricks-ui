@@ -6,7 +6,7 @@ import { Container, Typography } from '@material-ui/core';
 import TextfieldWrapper from '../../../components/form-components/TextField';
 import ButtonWrapper from '../../../components/form-components/Button';
 import { useDispatch, useSelector } from 'react-redux';
-// import { login } from '../../../../slices/authSlice/authSlice';
+import { addAirpay } from '../../../slices/airpaySlice/airpaySlice';
 // import { clearMessage } from '../../../../slices/messageSlice/messageSlice';
 import { useNavigate } from "react-router-dom";
 import Header from '../../../components/Header';
@@ -28,33 +28,32 @@ const CreateAirpayForm = (props) => {
     }
     
     const VALIDATION_SCHEMA = Yup.object().shape({
-        name: Yup.string().required("Firstname is required"),
-        locationName: Yup.string().required("Lasttname is required"),
+        name: Yup.string().required("Name is required"),
+        locationName: Yup.string().required("Location name field is required"),
         noColonies: Yup.string().required("Number of colonies is required"),
-        fence: Yup.string().required('REQUIRED'),
-        electricity: Yup.string().required('ELECTRICITYYY')
+        fence: Yup.string().required('Fence field is required'),
+        electricity: Yup.string().required('Electricity field is required')
       });
     
     const handleSubmit = (formValue) => {
-    //   const { email, password } = formValue;
-    //   setLoading(true);
-    //   dispatch(login({ email, password }))
-    //     .unwrap()
-    //     .then(() => {
-    //       props.history.push("/profile");
-    //       window.location.reload();
-    //     })
-    //     .catch(() => {
-    //       setLoading(false);
-    //     });
-    // const {name, location, numberOfColonies, fence, electricity} = formValue;
-    console.log('FORM VALUE', formValue);
+      const { name, locationName, noColonies, fence, electricity } = formValue;
+      console.log('VLEZE :::: ');
+      setLoading(true);
+      dispatch(addAirpay({ name, locationName, noColonies, fence, electricity }))
+        .unwrap()
+        .then(() => {
+          props.history.push('/airpays-page');
+          window.location.reload();
+        })
+        .catch(() => {
+            console.log('Vleze vo CATCH :: ');
+          setLoading(false);
+        });
     };
 
 
   return (
         <Grid container>
-            <Header />
         <Grid item xs={12} style={{ marginTop: '70px' }}>
           <Container maxWidth="md">
             <Formik
