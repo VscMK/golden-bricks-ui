@@ -2,8 +2,21 @@ import { React, useState, useEffect } from 'react';
 import LayoutWrapper from '../../components/layout';
 import UserService from '../../services/user-service/userService';
 // import DataGrid from '@material-ui/core';
-import { Grid, Typography, Button } from '@material-ui/core';
+import { 
+  Grid,
+  Typography, 
+  Button, 
+  TableContainer, 
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Paper
+ } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core';
+
 
 const UsersPage = () => {
 
@@ -22,6 +35,19 @@ const UsersPage = () => {
       }
     );
   }, []);
+
+  const useStyles = makeStyles({
+    btn: {
+      fontSize: 30,
+      backgroundColor: '#f8b133',
+      color: 'rgba(0,0,0,.87)',
+      '&:hover': {
+        background: '#f8b133',
+    },
+    }
+  });
+
+  const classes = useStyles();
 
   const navigate = useNavigate();
 
@@ -52,18 +78,49 @@ const UsersPage = () => {
           {content.first_name &&
             content.first_name.map((first_name, index) => <li key={index}>{first_name}</li>)}
         </ul> */}
-        <Grid style={{ marginTop: '100px' }} >
+        {/* <Grid style={{ marginTop: '100px' }} >
         {content && content.map((user)=> {
           return <Typography>{user.first_name}</Typography>;
         })}
         </Grid>
-        <Grid>
-          <Button  onClick={() => {
+       */}
+
+        <Grid style={{ marginTop: '70px' }}>
+          <Button  
+          className={classes.btn}
+          onClick={() => {
             return navigate('/register');
           }} >
             Add new user
           </Button>
-        </Grid>
+        </Grid> 
+
+  < TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="caption table">
+        <caption>A basic table example with a caption</caption>
+        <TableHead>
+          <TableRow>
+            <TableCell align="right">First name</TableCell>
+            <TableCell align="right">last name&nbsp;</TableCell>
+            <TableCell align="right">Email&nbsp;</TableCell>
+            <TableCell align="right">ID&nbsp;</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {content && content.map((row) => (
+            <TableRow key={row.name}>
+              {/* <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell> */}
+              <TableCell align="right">{row.first_name}</TableCell>
+              <TableCell align="right">{row.last_name}</TableCell>
+              <TableCell align="right">{row.email}</TableCell>
+              <TableCell align="right">{row.role_id}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
 
       {/* <DataGrid
         rows={content}
@@ -73,7 +130,7 @@ const UsersPage = () => {
         checkboxSelection
       /> */}
     </LayoutWrapper>
-  )
+  );
 }
 
 export default UsersPage;
