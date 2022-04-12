@@ -19,14 +19,16 @@ const getAirpays = (name, locationName, noColonies, fence, electricity) => {
   };
 
   const addAirpay = (name, locationName, noColonies, fence, electricity) => {
+    console.log('VLEZE VO API CALL ZA ADD :: ', name, locationName, noColonies, fence, electricity);
     return axios
-      .post(API_URL + 'apiary/create', {
+      .post(API_URL + 'apiary/create', { headers: authHeader() },
+      {
         name,
         locationName,
         noColonies,
         fence,
         electricity
-    })
+      })
       .then((response) => {
         return response.data;
       });
