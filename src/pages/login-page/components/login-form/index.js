@@ -24,11 +24,11 @@ const LoginForm = (props) => {
   }, [dispatch]);
 
   
-useEffect(() => {
-  if (isLoggedIn) {
-      return navigate('/profile');
-   }
-},[isLoggedIn]);
+  useEffect(() => {
+    if (isLoggedIn) {
+        return navigate('/profile');
+    }
+  },[isLoggedIn]);
 
 
    const INITIAL_VALUES = {
