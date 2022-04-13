@@ -5,21 +5,13 @@ import AirpayService from "../../services/airpay-service/airpayService";
 
 
 export const getAirpays = createAsyncThunk(
-    "airpays/getAirpays",
-    async ({}, thunkAPI) => {
-      try {
+    'airpays/getAirpays',
+    async (thunkAPI) => {
+      try{
         const response = await AirpayService.getAirpays();
-        thunkAPI.dispatch(setMessage(response.data.message));
-        return response.data;
+        return response;
       } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue();
+        return error?.response;
       }
     }
   );
@@ -29,50 +21,45 @@ export const getAirpays = createAsyncThunk(
     async ({ name, locationName, noColonies, fence, electricity }, thunkAPI) => {
       try {
         const response = await AirpayService.addAirpay(name, locationName, noColonies, fence, electricity);
-        thunkAPI.dispatch(setMessage(response.data.message));
         return response.data;
-      } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue();
+     } catch (error) {
+      return error?.response;   
       }
     }
   );
 
+  const initialState = {
+    airpays: [],
+    loading: false,
+    error: false,
+  }
+
 const airpaySlice = createSlice({
     name: 'airpays',
-    initialState: {
-        airpays: [],
-        message: null,
-        extraReducers: {
-            [getAirpays.pending]: (state, action) => {
-                state.status = 'loading';
-            },
-            [getAirpays.fulfilled]: (state, action) => {
-                state.airpays = action.payload;
-                state.status = 'success';
-            },
-            [getAirpays.rejected]: (state, action) => {
-                state.status = 'filled';
-            },
-            [addAirpay.pending]: (state, action) => {
-              state.status = 'loading';
-            },
-            [addAirpay.fulfilled]: (state, action) => {
-              state.status = 'success';
-            },
-            [addAirpay.rejected]: (state, action) => {
-              state.status = 'filled';
-            },
-        }
-    }
+    initialState,
+    extraReducers: {
+    [getAirpays.pending]: (state, action) => {
+    state.loading = true;
+    },
+    [getAirpays.fulfilled]: (state, {payload}) => {
+      state.airpays = payload;
+      state.loading = false;
+    },
+    [getAirpays.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    [addAirpay.pending]: (state, action) => {
+    state.status = 'loading';
+    },
+    [addAirpay.fulfilled]: (state, action) => {
+    state.status = 'success';
+    },
+    [addAirpay.rejected]: (state, action) => {
+    state.status = 'failed';
+    },
+  }
+    
 });
 
-const { reducer } = airpaySlice;
-
-export default reducer;
+export default airpaySlice.reducer;
