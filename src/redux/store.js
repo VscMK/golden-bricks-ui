@@ -3,7 +3,7 @@ import authReducer from '../slices/authSlice/authSlice';
 import messageReducer from '../slices/messageSlice/messageSlice';
 import airpayReducer from '../slices/airpaySlice/airpaySlice';
 
-export default configureStore({
+export const store = configureStore({
     reducer: {
         auth: authReducer,
         message: messageReducer,
