@@ -4,7 +4,7 @@ import authHeader from "../auth-header/authHeader";
 const API_URL = 'http://localhost:8081/'
 
 const getAllUsers = () => {
-  return axios.get(API_URL + "users", { headers: authHeader() });
+  return axios.get(API_URL + "users");
 }
 
 const getUserBoard = () => {
