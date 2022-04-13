@@ -14,17 +14,14 @@ axios.interceptors.request.use(
 )
 
 const getAirpays = () => {
-  console.log('VLEZE VO API CALL &&&&&&&&&&&');
     return axios
       .get(API_URL + 'apiary')
       .then((response) => {
-        console.log('RES :::::::::::: ', response.data);
         return response.data;
       });
   };
 
   const addAirpay = (name, locationName, noColonies, fence, electricity) => {
-    // console.log('VLEZE VO API CALL ZA ADD :: ', name, locationName, noColonies, fence, electricity);
     return axios
       .post(API_URL + 'apiary/create',
       {
