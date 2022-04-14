@@ -7,6 +7,7 @@ import AirpaysPage from './pages/airpays-page';
 import UsersPage from './pages/users-page';
 import InspectionsPage from './pages/inspections-page';
 import Profile from './components/profile';
+import CreateAirpayForm from './pages/airpays-page/create-airpay-form';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/users-page' element={<UsersPage />} />
         <Route path='/inspections-page' element={<InspectionsPage />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/create-apiary' element={<CreateAirpayForm />} />
         {/* <div className="App">
         < LoginPage />
         </div> */}
