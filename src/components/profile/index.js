@@ -21,25 +21,14 @@ const Profile = () => {
         <Header />
         <Grid style={{ marginTop: '100px' }}>
           <Typography variant='h3' >
-            Profile {currentUser.username}
+            Profile: {currentUser.User.first_name}
             </Typography>
           <Typography variant='h3' >
-            Token:{currentUser.accessToken.substring(0, 20)} ...{" "}
-            {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-          </Typography>
-          <Typography variant='h3' >
-            Id:{currentUser.id}
-          </Typography>
-          <Typography variant='h3' >
-            Email:{currentUser.email}
+            Email:{currentUser.User.email}
           </Typography>
           <Typography variant='h3'>
-            Authorities:
+            Authorities: {currentUser.User.role_id}
           </Typography>
-        {/* <ul>
-          {currentUser.roles &&
-            currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-        </ul> */}
         </Grid>
       </Container >
   );
