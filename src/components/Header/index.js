@@ -34,7 +34,7 @@ const Header = () => {
                    indicatorColor='primary'
                    onChange={(e, value) => setSelectedTab(value)}
                    >
-                     <Tab label='AIRPAYS' href="/airpays-page" />
+                     <Tab label='APIARYS' href="/airpays-page" />
                      <Tab label='USERS' href="/users-page"/>
                      <Tab label='INSPECTIONS' href="/inspections-page"/>
                    </Tabs>
