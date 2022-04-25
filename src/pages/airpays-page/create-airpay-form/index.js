@@ -37,7 +37,6 @@ const CreateAirpayForm = (props) => {
     
     const handleSubmit = (formValue) => {
       const { name, locationName, noColonies, fence, electricity } = formValue;
-      console.log('VLEZE :::: ');
       setLoading(true);
       dispatch(addAirpay({ name, locationName, noColonies, fence, electricity }))
         .unwrap()
@@ -46,7 +45,6 @@ const CreateAirpayForm = (props) => {
           window.location.reload();
         })
         .catch(() => {
-            console.log('Vleze vo CATCH :: ');
           setLoading(false);
         });
     };
@@ -67,7 +65,7 @@ const CreateAirpayForm = (props) => {
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
                     <Typography variant='h4' component='h2' gutterBottom >
-                      Create new airpay: 
+                      Create new apiary: 
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
