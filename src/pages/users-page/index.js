@@ -1,6 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import LayoutWrapper from '../../components/layout';
 import UserService from '../../services/user-service/userService';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { red } from '@mui/material/colors';
 // import DataGrid from '@material-ui/core';
 import { 
   Grid,
@@ -16,6 +19,7 @@ import {
  } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
+import Delete from '@mui/icons-material/Delete';
 
 
 const UsersPage = () => {
@@ -44,47 +48,28 @@ const UsersPage = () => {
       '&:hover': {
         background: '#f8b133',
     },
-    }
+    },
+    centerTable: {
+      position: 'absolute', 
+      left: '50%', 
+      top: '50%',
+      transform: 'translate(-50%, -50%)'  
+    },
   });
 
   const classes = useStyles();
 
   const navigate = useNavigate();
 
-  const columns = [
-    { field: 'first_name', headerName: 'First name', width: 130 },
-    { field: 'last_name', headerName: 'Last name', width: 130 },
-    {
-      field: 'email',
-      headerName: 'Email',
-      type: 'email',
-      width: 90,
-    },
-    {
-      field: 'role_id',
-      headerName: 'Role Id',
-      width: 160,
-    //   valueGetter: (params) =>
-    //     `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    },
-  ];
+  const handleDelete = (userId) => {
+    console.log('CLICK ', userId);
+  }
 
   console.log('USERS : ', content);
     
 
   return (
     <LayoutWrapper>
-        {/* <ul>
-          {content.first_name &&
-            content.first_name.map((first_name, index) => <li key={index}>{first_name}</li>)}
-        </ul> */}
-        {/* <Grid style={{ marginTop: '100px' }} >
-        {content && content.map((user)=> {
-          return <Typography>{user.first_name}</Typography>;
-        })}
-        </Grid>
-       */}
-
         <Grid style={{ marginTop: '70px' }}>
           <Button  
           className={classes.btn}
@@ -95,15 +80,15 @@ const UsersPage = () => {
           </Button>
         </Grid> 
 
+  <Grid className={classes.btn}>
   < TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="caption table">
-        <caption>A basic table example with a caption</caption>
         <TableHead>
           <TableRow>
-            <TableCell align="right">First name</TableCell>
-            <TableCell align="right">last name&nbsp;</TableCell>
-            <TableCell align="right">Email&nbsp;</TableCell>
-            <TableCell align="right">ID&nbsp;</TableCell>
+            <TableCell align="left" style={{width: '20%'}}>First name</TableCell>
+            <TableCell align="left" style={{width: '20%'}}>last name&nbsp;</TableCell>
+            <TableCell align="left" style={{width: '20%'}}>Email&nbsp;</TableCell>
+            <TableCell align="left" style={{width: '20%'}}>ID&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -112,15 +97,22 @@ const UsersPage = () => {
               {/* <TableCell component="th" scope="row">
                 {row.name}
               </TableCell> */}
-              <TableCell align="right">{row.first_name}</TableCell>
-              <TableCell align="right">{row.last_name}</TableCell>
-              <TableCell align="right">{row.email}</TableCell>
-              <TableCell align="right">{row.role_id}</TableCell>
+              <TableCell align="left" style={{width: '20%'}}>{row.first_name}</TableCell>
+              <TableCell align="left" style={{width: '20%'}}>{row.last_name}</TableCell>
+              <TableCell align="left" style={{width: '20%'}}>{row.email}</TableCell>
+              <TableCell align="left" style={{width: '5%'}}>{row.role_id}</TableCell>
+              <TableCell align="left" style={{width: '5%'}}><EditIcon color='primary' fontSize="large" /></TableCell>
+              <TableCell align="left" style={{width: '5%'}}>
+                <Button onClick={e => handleDelete(row.user_id)}>
+                  <DeleteIcon sx={{ color: red[500] }} fontSize="large"/>
+                </Button>
+                </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+    </Grid>
 
       {/* <DataGrid
         rows={content}
