@@ -28,6 +28,19 @@ export const getAirpays = createAsyncThunk(
     }
   );
 
+  export const deleteAirpay = createAsyncThunk(
+    "airpays/deleteAirpay",
+    async ({ apiary_id }, thunkAPI) => {
+      console.log('STIGNA VO THUNK');
+      try {
+        const response = await AirpayService.deleteAirpay(apiary_id);
+        return response.data;
+     } catch (error) {
+      return error?.response;   
+      }
+    }
+  );
+
   const initialState = {
     airpays: [],
     loading: false,
@@ -56,6 +69,15 @@ const airpaySlice = createSlice({
     state.status = 'success';
     },
     [addAirpay.rejected]: (state, action) => {
+    state.status = 'failed';
+    },
+    [deleteAirpay.pending]: (state, action) => {
+    state.status = 'loading';
+    },
+    [deleteAirpay.fulfilled]: (state, action) => {
+    state.status = 'success';
+    },
+    [deleteAirpay.rejected]: (state, action) => {
     state.status = 'failed';
     },
   }
