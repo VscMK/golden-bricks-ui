@@ -39,7 +39,6 @@ const UsersTable = (props) => {
                 <TableCell align="left" style={{width: '20%'}}>{row.last_name}</TableCell>
                 <TableCell align="left" style={{width: '20%'}}>{row.email}</TableCell>
                 <TableCell align="left" style={{width: '5%'}}>{row.role_id}</TableCell>
-                <TableCell align="left" style={{width: '5%'}}><EditIcon color='primary' fontSize="large" /></TableCell>
                 <TableCell align="left" style={{width: '5%'}}>
                     <Button onClick={e => props.handleDelete(row.user_id)}>
                     <DeleteIcon sx={{ color: red[500] }} fontSize="large"/>
