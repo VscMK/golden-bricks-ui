@@ -47,6 +47,7 @@ const ApiarysTable = (props) => {
 
   const handleEdit = (apiary) => {
     console.log('EDIT APIARY', apiary);
+    
   }
 
     console.log('OD TABELA ', airpays);
