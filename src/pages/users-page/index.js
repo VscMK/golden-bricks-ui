@@ -19,7 +19,7 @@ import {
  } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
-import Delete from '@mui/icons-material/Delete';
+import UsersTable from './users-table';
 
 
 const UsersPage = () => {
@@ -80,38 +80,8 @@ const UsersPage = () => {
           </Button>
         </Grid> 
 
-  <Grid className={classes.btn}>
-  < TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="caption table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left" style={{width: '20%'}}>First name</TableCell>
-            <TableCell align="left" style={{width: '20%'}}>last name&nbsp;</TableCell>
-            <TableCell align="left" style={{width: '20%'}}>Email&nbsp;</TableCell>
-            <TableCell align="left" style={{width: '20%'}}>ID&nbsp;</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {content && content.map((row) => (
-            <TableRow key={row.name}>
-              {/* <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell> */}
-              <TableCell align="left" style={{width: '20%'}}>{row.first_name}</TableCell>
-              <TableCell align="left" style={{width: '20%'}}>{row.last_name}</TableCell>
-              <TableCell align="left" style={{width: '20%'}}>{row.email}</TableCell>
-              <TableCell align="left" style={{width: '5%'}}>{row.role_id}</TableCell>
-              <TableCell align="left" style={{width: '5%'}}><EditIcon color='primary' fontSize="large" /></TableCell>
-              <TableCell align="left" style={{width: '5%'}}>
-                <Button onClick={e => handleDelete(row.user_id)}>
-                  <DeleteIcon sx={{ color: red[500] }} fontSize="large"/>
-                </Button>
-                </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Grid>
+          <UsersTable content={content} handleDelete={handleDelete}/>
     </Grid>
 
       {/* <DataGrid
