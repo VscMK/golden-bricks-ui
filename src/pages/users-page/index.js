@@ -4,8 +4,9 @@ import UserService from '../../services/user-service/userService';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { red } from '@mui/material/colors';
-// import DataGrid from '@material-ui/core';
-import { 
+import Header from '../../components/Header';
+import {
+  Container,
   Grid,
   Typography, 
   Button, 
@@ -69,8 +70,9 @@ const UsersPage = () => {
     
 
   return (
-    <LayoutWrapper>
-        <Grid style={{ marginTop: '70px' }}>
+    <Container>
+      <Header />
+         <Grid style={{ marginTop: '100px' }}>
           <Button  
           className={classes.btn}
           onClick={() => {
@@ -80,7 +82,7 @@ const UsersPage = () => {
           </Button>
         </Grid> 
 
-    <Grid>
+    <Grid style={{ marginTop: '70px' }}>
           <UsersTable content={content} handleDelete={handleDelete}/>
     </Grid>
 
@@ -91,7 +93,7 @@ const UsersPage = () => {
         rowsPerPageOptions={[5]}
         checkboxSelection
       /> */}
-    </LayoutWrapper>
+    </Container>
   );
 }
 
