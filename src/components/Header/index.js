@@ -31,6 +31,10 @@ const Header = (props) => {
       });
     }
 
+    const navigateToProfilePage = () => {
+      return navigate('/profile');
+    }
+
     const useStyles = makeStyles({
         toolbar: {
           backgroundColor: '#f8b133',
@@ -48,11 +52,13 @@ const Header = (props) => {
            {/* <DrawerComponent openDrawer={openDrawer} /> */}
            <AppBar className={classes.toolbar} position='absolute'>
                <Toolbar>
+                 <Button onClick={navigateToProfilePage}>
                    <Typography>
                    <Box sx={{ fontWeight: 'bold', m: 1, letterSpacing: 5}}>
                        GOLDEN BRICKS
                    </Box>
                    </Typography>
+                   </Button>
                    <Tabs value={selectedTab}
                    centered
                    indicatorColor='primary'
