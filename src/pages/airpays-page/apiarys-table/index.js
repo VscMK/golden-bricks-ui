@@ -38,6 +38,11 @@ const ApiarysTable = (props) => {
     dispatch(deleteAirpay(id))
     .unwrap()
     .then(() => {
+    setLoading(true);
+    dispatch(getAirpays())
+    .unwrap()
+    .then(() => {
+    })
     })
     .catch(() => {
       setLoading(false);
@@ -49,7 +54,6 @@ const ApiarysTable = (props) => {
 
   }
 
-    console.log('OD TABELA ', airpays);
   return (
     <Grid style={{ marginTop: '70px' }}>
          < TableContainer component={Paper}>
