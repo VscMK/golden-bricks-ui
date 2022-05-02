@@ -33,10 +33,9 @@ const ApiarysTable = (props) => {
   },[]);
 
   const handleDelete = (apiaryId) => {
-    console.log('DEL:ETE APIARY :: ', apiaryId);
     const id = parseInt(apiaryId);
     setLoading(true);
-  dispatch(deleteAirpay({id}))
+    dispatch(deleteAirpay(id))
     .unwrap()
     .then(() => {
     })
@@ -47,7 +46,7 @@ const ApiarysTable = (props) => {
 
   const handleEdit = (apiary) => {
     console.log('EDIT APIARY', apiary);
-    
+
   }
 
     console.log('OD TABELA ', airpays);

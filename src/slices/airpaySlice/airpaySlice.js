@@ -30,8 +30,7 @@ export const getAirpays = createAsyncThunk(
 
   export const deleteAirpay = createAsyncThunk(
     "airpays/deleteAirpay",
-    async ({ apiary_id }, thunkAPI) => {
-      console.log('STIGNA VO THUNK');
+    async (apiary_id, thunkAPI) => {
       try {
         const response = await AirpayService.deleteAirpay(apiary_id);
         return response.data;
