@@ -37,7 +37,6 @@ const getAirpays = () => {
   };
 
   const deleteAirpay = (id) => {
-    console.log('STIGNA VO DELETE :: ', id);
     return axios
       .delete(API_URL + `apiary/delete/${id}`)
       .then((response) => {
