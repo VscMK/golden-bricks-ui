@@ -12,7 +12,7 @@ const Profile = () => {
   const navigate = useNavigate();
 
   if (!currentUser) {
-    return navigate('/login');
+    return navigate('/');
   }
 
   console.log('PROFILE ::::: ', currentUser);
