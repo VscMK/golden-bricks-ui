@@ -68,12 +68,10 @@ const Header = (props) => {
                      <Tab label='USERS' href="/users-page"/>
                      <Tab label='INSPECTIONS' href="/inspections-page"/>
                    </Tabs>
-                   {/* <Button onClick={console.log('LOGOUT')} fontSize='large'sx={{ fontSize: 40, marginLeft: 'auto' }}> */}
                    <PowerSettingsNewIcon 
                    fontSize='large'sx={{ fontSize: 40, marginLeft: 'auto' }}
                    onClick={handleLogout}
                    />
-                   {/* </Button> */}
                </Toolbar>
            </AppBar>
            </div>
