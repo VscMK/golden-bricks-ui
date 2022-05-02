@@ -1,11 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppBar, Typography, Toolbar, Box, Tabs, Tab, Button} from '@material-ui/core';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { makeStyles } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../slices/authSlice/authSlice';
+import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+
+const Header = (props) => {
     
     const [selectedTab, setSelectedTab] = useState();
+    const { isLoggedIn } = useSelector((state => state.auth));
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      if (!isLoggedIn) {
+          return navigate('/');
+      }
+    },[isLoggedIn]);
+
+    const handleLogout = () => {
+      dispatch(logout())
+      .unwrap()
+      .then(() => {
+        props.history.push('/');
+        window.location.reload();
+      })
+      .catch(() => {
+      });
+    }
 
     const useStyles = makeStyles({
         toolbar: {
@@ -38,9 +62,12 @@ const Header = () => {
                      <Tab label='USERS' href="/users-page"/>
                      <Tab label='INSPECTIONS' href="/inspections-page"/>
                    </Tabs>
+                   {/* <Button onClick={console.log('LOGOUT')} fontSize='large'sx={{ fontSize: 40, marginLeft: 'auto' }}> */}
                    <PowerSettingsNewIcon 
                    fontSize='large'sx={{ fontSize: 40, marginLeft: 'auto' }}
+                   onClick={handleLogout}
                    />
+                   {/* </Button> */}
                </Toolbar>
            </AppBar>
            </div>
