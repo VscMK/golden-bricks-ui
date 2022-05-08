@@ -13,6 +13,9 @@ import Header from '../../../components/Header';
 
 const CreateAirpayForm = (props) => {
 
+ if (props.apiary) {
+}
+
   const [loading, setLoading] = useState(false);
 //   const { isLoggedIn } = useSelector((state => state.auth));
 //   const { message } = useSelector((state => state.message));
@@ -41,12 +44,12 @@ const CreateAirpayForm = (props) => {
       dispatch(addAirpay({ name, locationName, noColonies, fence, electricity }))
         .unwrap()
         .then(() => {
-          props.history.push('/airpays-page');
           window.location.reload();
         })
         .catch(() => {
           setLoading(false);
         });
+        return navigate('/airpays-page');
     };
 
 
