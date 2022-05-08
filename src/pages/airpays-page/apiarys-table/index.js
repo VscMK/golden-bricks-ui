@@ -15,10 +15,12 @@ import {
   import { red } from '@mui/material/colors';
   import { getAirpays, deleteAirpay } from '../../../slices/airpaySlice/airpaySlice';
   import { useSelector,useDispatch } from 'react-redux';
+  import { useNavigate } from 'react-router';
 
 const ApiarysTable = (props) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { airpays } = useSelector((state => state.airpays));
 
   useEffect (() => {
@@ -50,8 +52,14 @@ const ApiarysTable = (props) => {
   }
 
   const handleEdit = (apiary) => {
-    console.log('EDIT APIARY', apiary);
-
+    window.localStorage.setItem('apiary', apiary.apiary_id);
+    // dispatch(saveApiary(apiary));
+    // // .unwrap()
+    // .then(() => {
+    // })
+    // .catch(e => window.alert('ERROR ', e)
+    // );
+    return navigate('/update-apiary');
   }
 
   return (
