@@ -28,11 +28,30 @@ export const getAirpays = createAsyncThunk(
     }
   );
 
+  // export const logout = createAsyncThunk(
+  //   "auth/logout",
+  //   async () => {
+  //   await AuthService.logout();
+  // });
+  
+
+  export const updateApiary = createAsyncThunk(
+    'airpays/editApiary',
+    async ({ id, name, locationName, noColonies, fence, electricity }, thunkAPI) => {
+      try {
+        const response = await AirpayService.updateApiary(id, name, locationName, noColonies, fence, electricity);
+        return response.data;
+     } catch (error) {
+      return error?.response;   
+      }
+    }
+  )
+
   export const deleteAirpay = createAsyncThunk(
     "airpays/deleteAirpay",
-    async (apiary_id, thunkAPI) => {
+    async (apiary, thunkAPI) => {
       try {
-        const response = await AirpayService.deleteAirpay(apiary_id);
+        const response = await AirpayService.deleteAirpay(apiary);
         return response.data;
      } catch (error) {
       return error?.response;   
@@ -42,6 +61,7 @@ export const getAirpays = createAsyncThunk(
 
   const initialState = {
     airpays: [],
+    apiary: null,
     loading: false,
     error: false,
   }
@@ -49,6 +69,9 @@ export const getAirpays = createAsyncThunk(
 const airpaySlice = createSlice({
     name: 'airpays',
     initialState,
+    // reducers: {
+    //   apiary: (state, action) => action.payload
+    // },
     extraReducers: {
     [getAirpays.pending]: (state, action) => {
     state.loading = true;
@@ -68,6 +91,15 @@ const airpaySlice = createSlice({
     state.status = 'success';
     },
     [addAirpay.rejected]: (state, action) => {
+    state.status = 'failed';
+    },
+    [updateApiary.pending]: (state, action) => {
+    state.status = 'loading';
+    },
+    [updateApiary.fulfilled]: (state, action) => {
+    state.status = 'success';
+    },
+    [updateApiary.rejected]: (state, action) => {
     state.status = 'failed';
     },
     [deleteAirpay.pending]: (state, action) => {
