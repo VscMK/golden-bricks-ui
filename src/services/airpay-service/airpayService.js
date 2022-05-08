@@ -36,6 +36,15 @@ const getAirpays = () => {
       });
   };
 
+  const updateApiary = (id, name, locationName, noColonies, fence, electricity) => {
+    return axios
+    .put(API_URL + `apiary/update/${id}`,
+    {name, locationName, noColonies, fence, electricity})
+    .then((response) => {
+      return response.data;
+    });
+  };
+
   const deleteAirpay = (id) => {
     return axios
       .delete(API_URL + `apiary/delete/${id}`)
@@ -47,6 +56,7 @@ const getAirpays = () => {
   const AirpayService = {
     getAirpays,
     addAirpay,
-    deleteAirpay
+    deleteAirpay,
+    updateApiary,
   };
   export default AirpayService;
