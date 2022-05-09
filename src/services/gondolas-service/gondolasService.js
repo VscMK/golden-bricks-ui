@@ -29,9 +29,19 @@ const addGondola = (apiaryId) => {
       });
   };
 
+const deleteGondola = (id) => {
+  console.log('GOND ID :: ', id);
+  return axios
+  .delete(API_URL + `gondola/delete/${id}`)
+  .then((response) => {
+    return response.data;
+  });
+}
+
 
   const GondolaService = {
     getGondolas,
     addGondola,
+    deleteGondola,
   };
   export default GondolaService;

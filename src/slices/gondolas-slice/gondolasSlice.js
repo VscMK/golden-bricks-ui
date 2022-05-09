@@ -5,7 +5,7 @@ import GondolaService from '../../services/gondolas-service/gondolasService';
 
 
 export const getGondolas = createAsyncThunk(
-    'gondola',
+    'gondolas',
     async (thunkAPI) => {
       try{
         const response = await GondolaService.getGondolas();
@@ -17,13 +17,25 @@ export const getGondolas = createAsyncThunk(
   );
 
   export const addGondola = createAsyncThunk(
-    "airpays/addGondola",
+    "gondolas/addGondola",
     async ({ id }, thunkAPI) => {
       try {
         const response = await GondolaService.addGondola(id);
         return response.data;
      } catch (error) {
       return error?.response;   
+      }
+    }
+  );
+
+  export const deleteGondola = createAsyncThunk(
+    'gondolas/deleteGondola',
+    async(id, thunkAPI) => {
+      try{
+        const response = await GondolaService.deleteGondola(id);
+        return response.data;
+      } catch (error) {
+        return error?.response;
       }
     }
   );
@@ -56,6 +68,15 @@ const gondolaSlice = createSlice({
     state.status = 'success';
     },
     [addGondola.rejected]: (state, action) => {
+    state.status = 'failed';
+    },
+    [deleteGondola.pending]: (state, action) => {
+    state.status = 'loading';
+    },
+    [deleteGondola.fulfilled]: (state, action) => {
+    state.status = 'success';
+    },
+    [deleteGondola.rejected]: (state, action) => {
     state.status = 'failed';
     },
   }

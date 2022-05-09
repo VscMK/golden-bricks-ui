@@ -16,7 +16,7 @@ import {
   import { red, green } from '@mui/material/colors';
   import { useSelector,useDispatch } from 'react-redux';
   import { useNavigate } from 'react-router';
-import { getGondolas } from '../../../slices/gondolas-slice/gondolasSlice';
+import gondolasSlice, { deleteGondola, getGondolas } from '../../../slices/gondolas-slice/gondolasSlice';
 
 const GondolasTable = (props) => {
   const [loading, setLoading] = useState(false);
@@ -46,32 +46,26 @@ const GondolasTable = (props) => {
     return navigate('/update-apiary');
   }
 
-  const navigateToColonies = (apiary) => {
-    window.localStorage.setItem('apiaryId', apiary.apiary_id);
-    // dispatch(saveApiary(apiary));
-    // // .unwrap()
-    // .then(() => {
-    // })
-    // .catch(e => window.alert('ERROR ', e)
-    // );
+  const navigateToColonies = (gondolaId) => {
+    window.localStorage.setItem('gondolaId', gondolaId);
     return navigate('/gondolas-page');
   }
 
   const handleDelete = (gondolaId) => {
     const id = parseInt(gondolaId);
-    // setLoading(true);
-    // dispatch(deleteAirpay(id))
-    // .unwrap()
-    // .then(() => {
-    // setLoading(true);
-    // dispatch(getAirpays())
-    // .unwrap()
-    // .then(() => {
-    // })
-    // })
-    // .catch(() => {
-    //   setLoading(false);
-    // });
+    setLoading(true);
+    dispatch(deleteGondola(id))
+    .unwrap()
+    .then(() => {
+    setLoading(true);
+    dispatch(getGondolas())
+    .unwrap()
+    .then(() => {
+    })
+    })
+    .catch(() => {
+      setLoading(false);
+    });
   };
 
   return (
@@ -97,7 +91,7 @@ const GondolasTable = (props) => {
                 </Button>
               </TableCell>
               <TableCell align="left" style={{width: '5%'}}>
-                <Button onClick={e => navigateToColonies(row)}>
+                <Button onClick={e => navigateToColonies(row.gondola_id)}>
                   <AddBoxIcon sx={{ color: green[500] }} fontSize="large"/>
                 </Button>
               </TableCell>
