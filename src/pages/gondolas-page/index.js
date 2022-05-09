@@ -4,6 +4,7 @@ import { Container, Grid, Button, makeStyles } from '@material-ui/core';
 import { useNavigate } from 'react-router';
 import { addGondola, getGondolas } from '../../slices/gondolas-slice/gondolasSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import GondolasTable from './gondolas-table';
 
 const GondolasPage = () => {
 
@@ -26,19 +27,6 @@ const GondolasPage = () => {
 
   const classes = useStyles();
 
-  useEffect (() => {
-    setLoading(true);
-  dispatch(getGondolas())
-    .unwrap()
-    .then(() => {
-    })
-    .catch(() => {
-      setLoading(false);
-    });
-  },[]);
-
-  console.log('GONDOLAS : ', gondolas);
-
   return (
     <Container>
         <Header />
@@ -60,6 +48,9 @@ const GondolasPage = () => {
           }} >
             Add new gondola
           </Button>
+        </Grid>
+        <Grid>
+          <GondolasTable />
         </Grid>
     </Container>
   )
