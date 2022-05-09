@@ -12,7 +12,8 @@ import {
    } from '@material-ui/core';
   import EditIcon from '@mui/icons-material/Edit';
   import DeleteIcon from '@mui/icons-material/Delete';
-  import { red } from '@mui/material/colors';
+  import AddBoxIcon from '@mui/icons-material/AddBox';
+  import { red, green } from '@mui/material/colors';
   import { getAirpays, deleteAirpay } from '../../../slices/airpaySlice/airpaySlice';
   import { useSelector,useDispatch } from 'react-redux';
   import { useNavigate } from 'react-router';
@@ -34,6 +35,28 @@ const ApiarysTable = (props) => {
     });
   },[]);
 
+  const handleEdit = (apiary) => {
+    window.localStorage.setItem('apiary', apiary.apiary_id);
+    // dispatch(saveApiary(apiary));
+    // // .unwrap()
+    // .then(() => {
+    // })
+    // .catch(e => window.alert('ERROR ', e)
+    // );
+    return navigate('/update-apiary');
+  }
+
+  const navigateToColonies = (apiary) => {
+    window.localStorage.setItem('apiaryId', apiary.apiary_id);
+    // dispatch(saveApiary(apiary));
+    // // .unwrap()
+    // .then(() => {
+    // })
+    // .catch(e => window.alert('ERROR ', e)
+    // );
+    return navigate('/gondolas-page');
+  }
+
   const handleDelete = (apiaryId) => {
     const id = parseInt(apiaryId);
     setLoading(true);
@@ -49,17 +72,6 @@ const ApiarysTable = (props) => {
     .catch(() => {
       setLoading(false);
     });
-  }
-
-  const handleEdit = (apiary) => {
-    window.localStorage.setItem('apiary', apiary.apiary_id);
-    // dispatch(saveApiary(apiary));
-    // // .unwrap()
-    // .then(() => {
-    // })
-    // .catch(e => window.alert('ERROR ', e)
-    // );
-    return navigate('/update-apiary');
   }
 
   return (
@@ -90,6 +102,11 @@ const ApiarysTable = (props) => {
               <TableCell align="left" style={{width: '5%'}}>
                 <Button onClick={e => handleEdit(row)}>
                   <EditIcon color='primary' fontSize="large" />
+                </Button>
+              </TableCell>
+              <TableCell align="left" style={{width: '5%'}}>
+                <Button onClick={e => navigateToColonies(row)}>
+                  <AddBoxIcon sx={{ color: green[500] }} fontSize="large"/>
                 </Button>
               </TableCell>
               <TableCell align="left" style={{width: '5%'}}>
