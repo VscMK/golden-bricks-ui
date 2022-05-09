@@ -27,14 +27,7 @@ export const getAirpays = createAsyncThunk(
       }
     }
   );
-
-  // export const logout = createAsyncThunk(
-  //   "auth/logout",
-  //   async () => {
-  //   await AuthService.logout();
-  // });
   
-
   export const updateApiary = createAsyncThunk(
     'airpays/editApiary',
     async ({ id, name, locationName, noColonies, fence, electricity }, thunkAPI) => {
@@ -61,7 +54,6 @@ export const getAirpays = createAsyncThunk(
 
   const initialState = {
     airpays: [],
-    apiary: null,
     loading: false,
     error: false,
   }
@@ -69,9 +61,6 @@ export const getAirpays = createAsyncThunk(
 const airpaySlice = createSlice({
     name: 'airpays',
     initialState,
-    // reducers: {
-    //   apiary: (state, action) => action.payload
-    // },
     extraReducers: {
     [getAirpays.pending]: (state, action) => {
     state.loading = true;
