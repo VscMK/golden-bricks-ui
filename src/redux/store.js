@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from '../slices/authSlice/authSlice';
 import messageReducer from '../slices/messageSlice/messageSlice';
 import airpayReducer from '../slices/airpaySlice/airpaySlice';
-import singleApiaryReducer  from '../slices/singleApiarySlice/singleApiarySlice';
+//import singleApiaryReducer  from '../slices/singleApiarySlice/singleApiarySlice';
 import gondolasSlice from "../slices/gondolas-slice/gondolasSlice";
 
 export const store = configureStore({
@@ -10,7 +10,7 @@ export const store = configureStore({
         auth: authReducer,
         message: messageReducer,
         airpays: airpayReducer,
-        apiary: singleApiaryReducer,
+    
         gondolas: gondolasSlice,
     },
 });
