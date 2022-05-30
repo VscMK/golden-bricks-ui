@@ -7,10 +7,13 @@ import AirpaysPage from './pages/airpays-page';
 import UsersPage from './pages/users-page';
 import InspectionsPage from './pages/inspections-page';
 import Profile from './components/profile';
-import CreateAirpayForm from './pages/airpays-page/create-airpay-form';
-import UpdateApiaryForm from './pages/update-apiary-page/update-apiary-form';
 import GondolasPage from './pages/gondolas-page';
-import CreateGondolaForm from './pages/create-gondola-page/create-gondola-form';
+import ColoniesPage from './pages/colonies-page';
+import CreateApiaryPage from './pages/create-apiary-page';
+import CreateGondolaPage from './pages/create-gondola-page';
+import CreateColonyPage from './pages/create-colony-page';
+import UpdateApiaryPage from './pages/update-apiary-page';
+import UpdateColonyPage from './pages/update-colony';
 
 function App() {
   return (
@@ -23,10 +26,13 @@ function App() {
         <Route path='/users-page' element={<UsersPage />} />
         <Route path='/inspections-page' element={<InspectionsPage />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/create-apiary' element={<CreateAirpayForm />} />
-        <Route path='/update-apiary' element={<UpdateApiaryForm />} />
+        <Route path='/create-apiary' element={<CreateApiaryPage />} />
+        <Route path='/update-apiary' element={<UpdateApiaryPage />} />
         <Route path='/gondolas-page' element={<GondolasPage />} />  
-        <Route path='/create-gondola' element={<CreateGondolaForm />} />
+        <Route path='/create-gondola' element={<CreateGondolaPage />} />
+        <Route path='/colonies-page' element={<ColoniesPage />} /> 
+        <Route path='/create-colony' element={<CreateColonyPage />} />
+        <Route path='/update-colony' element={<UpdateColonyPage />} />
         {/* <div className="App">
         < LoginPage />
         </div> */}
