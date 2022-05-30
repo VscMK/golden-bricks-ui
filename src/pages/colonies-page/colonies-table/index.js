@@ -22,6 +22,8 @@ const ColoniesTable = (props) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const apiaryId = window.localStorage.getItem('apiaryId');
+  const gondolaId = window.localStorage.getItem('gondolaId');
   const { colonies } = useSelector(state => state.colonies);
 
   useEffect (() => {
@@ -87,8 +89,8 @@ const ColoniesTable = (props) => {
             <TableBody>
             {colonies && colonies.map((row) => (
             <TableRow key={row.name}>
-                <TableCell align="left">{row.apiary_id}</TableCell>
-                <TableCell align="left">{row.gondola_id}</TableCell>
+                <TableCell align="left">{apiaryId}</TableCell>
+                <TableCell align="left">{gondolaId}</TableCell>
                 <TableCell align="left">{row.colony_id}</TableCell>
                 <TableCell align="left">{row.no_boxes}</TableCell>
                 <TableCell align="left">{row.queen_id}</TableCell>
