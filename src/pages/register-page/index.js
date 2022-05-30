@@ -22,7 +22,9 @@ const RegisterPage = () => {
 
   return (
     <Container >
-      <Header />
+      <Grid style={{ marginTop: '70px' }}>
+        <Header />
+      </Grid>
       <Grid className={classes.centerLoginForm}>
         <div className="center-form">
           <RegisterForm />
