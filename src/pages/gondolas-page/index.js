@@ -34,7 +34,6 @@ const GondolasPage = () => {
           <Button  
           className={classes.btn}
           onClick={() => {
-            // return navigate('/create-gondola');
             // setLoading(true);
             dispatch(addGondola({ id }))
               .unwrap()
@@ -45,6 +44,7 @@ const GondolasPage = () => {
               .catch(() => {
                 // setLoading(false);
               });
+              // return navigate('/create-gondola');
           }} >
             Add new gondola
           </Button>
