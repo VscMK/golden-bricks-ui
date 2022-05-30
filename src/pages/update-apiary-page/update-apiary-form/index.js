@@ -11,7 +11,7 @@ import { updateApiary } from '../../../slices/airpaySlice/airpaySlice';
 import { useNavigate } from "react-router-dom";
 import Header from '../../../components/Header';
 
-const CreateAirpayForm = (props) => {
+const UpdateAirpayForm = (props) => {
 
   const [loading, setLoading] = useState(false);
   const { airpays } = useSelector((state => state.airpays));
@@ -117,4 +117,4 @@ const CreateAirpayForm = (props) => {
     );
 }
 
-export default CreateAirpayForm;
+export default UpdateAirpayForm;

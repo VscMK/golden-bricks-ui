@@ -1,12 +1,16 @@
 import React from 'react';
-import Grid from '@material-ui/core';
-import CreateAirpayForm from '../airpays-page/create-airpay-form';
+import {Container, Grid} from '@material-ui/core';
+import Header from '../../components/Header';
+import UpdateAirpayForm from './update-apiary-form';
 
 const UpdateApiaryPage = () => {
   return (
-    <Grid style={{ marginTop: '70px' }}>
-        <CreateAirpayForm />
-    </Grid>
+    <Container>
+      <Header />
+      <Grid style={{ marginTop: '70px' }}>
+        <UpdateAirpayForm />
+      </Grid>
+    </Container>
   )
 }
 
