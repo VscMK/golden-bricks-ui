@@ -22,6 +22,7 @@ const GondolasTable = (props) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const apiaryId = window.localStorage.getItem('apiaryId'); 
   const { gondolas } = useSelector((state => state.gondolas));
 
   useEffect (() => {
@@ -35,6 +36,8 @@ const GondolasTable = (props) => {
     });
   },[]);
 
+  console.log('GONDOLAS :: ', gondolas);
+
   const handleEdit = (apiary) => {
     window.localStorage.setItem('apiary', apiary.apiary_id);
     // dispatch(saveApiary(apiary));
@@ -43,12 +46,12 @@ const GondolasTable = (props) => {
     // })
     // .catch(e => window.alert('ERROR ', e)
     // );
-    return navigate('/update-apiary');
+    return navigate('/update-gondola');
   }
 
   const navigateToColonies = (gondolaId) => {
     window.localStorage.setItem('gondolaId', gondolaId);
-    return navigate('/gondolas-page');
+    return navigate('/colonies-page');
   }
 
   const handleDelete = (gondolaId) => {
@@ -82,7 +85,7 @@ const GondolasTable = (props) => {
             <TableBody>
             {gondolas && gondolas.map((row) => (
             <TableRow key={row.name}>
-                <TableCell align="left">{row.apiary_id}</TableCell>
+                <TableCell align="left">{apiaryId}</TableCell>
                 <TableCell align="left">{row.gondola_id}</TableCell>
                 <TableCell align="left">{row.Colonies.length}</TableCell>
               <TableCell align="left" style={{width: '5%'}}>
