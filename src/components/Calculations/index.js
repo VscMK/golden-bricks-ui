@@ -22,7 +22,7 @@ class NumericInput extends React.Component {
       var newNum1 = +e.target.value;
       this.setState({
         num1: newNum1,
-        result: newNum1 + this.state.num2,
+        result: [50 - (this.state.num2 + newNum1)] * 2,
       });
     }
   }

@@ -64,7 +64,8 @@ const CreateAirpayForm = (props) => {
               validationSchema={VALIDATION_SCHEMA}
               onSubmit={handleSubmit}
                 >
-              <Form>
+                  {(formik)=> (
+              <Form onSubmit={formik.handleSubmit}>
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
                     <Typography variant='h4' component='h2' gutterBottom >
@@ -75,30 +76,35 @@ const CreateAirpayForm = (props) => {
                     <TextfieldWrapper 
                     name='name'
                     label={'Name:'} 
+                    onChange={formik.handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <TextfieldWrapper 
                     name='locationName'
                     label={'Location:'} 
+                    onChange={formik.handleChange}
                     />
                    </Grid>
                    <Grid item xs={12}>
                     <TextfieldWrapper 
                     name='noColonies'
                     label={'Number of colonies:'} 
+                    onChange={formik.handleChange}
                     />
                   </Grid>
                  <Grid item xs={12}>
                     <TextfieldWrapper 
                     name='fence'
                     label={'Fence:'}
+                    onChange={formik.handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <TextfieldWrapper 
                     name='electricity'
                     label={'Electricity:'}
+                    onChange={formik.handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -110,6 +116,7 @@ const CreateAirpayForm = (props) => {
                   </Grid>
                 </Grid>
               </Form>
+                  )}
             </Formik>
           </Container>
         </Grid>

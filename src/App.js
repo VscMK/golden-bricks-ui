@@ -22,13 +22,14 @@ function App() {
         <Route path='/admin-page' element={<AdminPage />} />
         <Route path='/airpays-page' element={<AirpaysPage />} />
         <Route path='/users-page' element={<UsersPage />} />
-        <Route path='/inspections-page' element={<InspectionsPage />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/inspections-page' element={<InspectionsPage />} />
         <Route path='/create-apiary' element={<CreateAirpayForm />} />
         <Route path='/update-apiary' element={<UpdateApiaryForm />} />
         <Route path='/gondolas-page' element={<GondolasPage />} />  
         <Route path='/create-inspections' element={<CreateInspectionsForm/>}/>
-    
+
+        
         {/* <div className="App">
         < LoginPage />
         </div> */}

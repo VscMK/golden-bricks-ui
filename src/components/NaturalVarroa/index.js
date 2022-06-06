@@ -22,7 +22,7 @@ class NumericInput extends React.Component {
       var newNum1 = +e.target.value;
       this.setState({
         num1: newNum1,
-        result: newNum1 + this.state.num2,
+        result: newNum1/ this.state.num2
       });
     }
   }
@@ -36,6 +36,7 @@ class NumericInput extends React.Component {
       });
     }
   }
+  
 
   render() {
     return (
@@ -58,7 +59,7 @@ class NumericInput extends React.Component {
           </FormControl>
         </Grid>
 
-        <InputLabel sx={{ mb: 1, mt: 3 }}>Total number of varroa</InputLabel>
+        <InputLabel sx={{ mb: 1, mt: 3 }}>Total number of days</InputLabel>
 
         <Grid container direction="row">
           <FormControl sx={{ width: "25ch", mb: 5 }} variant="outlined">

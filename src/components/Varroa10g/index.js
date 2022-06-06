@@ -10,9 +10,11 @@ class Varroa extends React.Component {
     super(props);
     this.state = {
       num1: 0,
+      num2: 0,
       result: 0,
     };
     this._changeNum1 = this._changeNum1.bind(this);
+    this._changeNum2 = this._changeNum2.bind(this);
   }
 
   _changeNum1(e) {
@@ -20,7 +22,16 @@ class Varroa extends React.Component {
       var newNum1 = +e.target.value;
       this.setState({
         num1: newNum1,
-        result: newNum1 * 10,
+        result: (newNum1*10) / this.state.num2
+      });
+    }
+  }
+  _changeNum2(e) {
+    if (e.target.validity.valid) {
+      var newNum2 = +e.target.value;
+      this.setState({
+        num2: newNum2,
+        result: (this.state.num1*10)  / newNum2,
       });
     }
   }
@@ -35,13 +46,23 @@ class Varroa extends React.Component {
           varroa
         </Typography>
 
-        <InputLabel sx={{ mb: 1, mt: 3 }}>Total number of varroa</InputLabel>
+        <InputLabel sx={{ mb: 1, mt: 3 }}>Total number of varroa * 10</InputLabel>
 
         <Grid container direction="row">
           <FormControl sx={{ width: "25ch", mb: 5 }} variant="outlined">
             <OutlinedInput
               value={this.state.num1}
               onChange={this._changeNum1}
+            />
+          </FormControl>
+        </Grid>
+        <InputLabel sx={{ mb: 1, mt: 3 }}>Net bees weight</InputLabel>
+
+        <Grid container direction="row">
+          <FormControl sx={{ width: "25ch", mb: 5 }} variant="outlined">
+            <OutlinedInput
+              value={this.state.num2}
+              onChange={this._changeNum2}
             />
           </FormControl>
         </Grid>
