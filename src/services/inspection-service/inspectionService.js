@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "../auth-header/authHeader";
 
-const API_URL = "http://localhost:8081/";
+const API_URL = axios.create({baseURL: "http://localhost:8081/"}) ;
 
 axios.interceptors.request.use(
   (config) => {
@@ -14,7 +14,8 @@ axios.interceptors.request.use(
 );
 
 const getInspections = () => {
-  return axios.get(API_URL + "inspection").then((response) => {
+ return axios.get(API_URL + "inspection")
+  .then((response) => {
     return response.data;
   });
 };
@@ -45,7 +46,8 @@ const addInspection = (
   comment
 ) => {
   return axios
-    .post(API_URL + "inspection/create", {
+      .post(API_URL + "inspection/create", 
+   {
       apiary_id,
       colony_id,
       number_of_boxes,
@@ -69,7 +71,8 @@ const addInspection = (
       attention_needed_time,
       total_weight,
       comment,
-    })
+   })
+ 
     .then((response) => {
       return response.data;
     });

@@ -6,7 +6,11 @@ import airpayReducer from '../slices/airpaySlice/airpaySlice';
 import gondolasSlice from "../slices/gondolas-slice/gondolasSlice";
 import inspectionsSlice from "../slices/inspectionSlice/inspectionSlice";
 
+
 export const store = configureStore({
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false,
+      }),
     reducer: {
         auth: authReducer,
         message: messageReducer,

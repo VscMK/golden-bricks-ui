@@ -19,8 +19,6 @@ function IconButtons(props) {
         <div>
           <IconButton
          
-                     
-         
             color={currentButton === 0 ? "success" : "default" }
             onClick={() => onButtonClicked(0)}>
             <SentimentSatisfiedAltIcon />

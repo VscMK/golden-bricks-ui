@@ -4,6 +4,8 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@material-ui/core/FormControl";
 import { FormGroup, Grid } from "@material-ui/core";
 import { InputLabel } from "@mui/material";
+import TextFields from "../inspection-formular-textfield";
+import { Field } from "formik";
 
 class NumericInput extends React.Component {
   constructor(props) {
@@ -51,7 +53,7 @@ class NumericInput extends React.Component {
         <InputLabel sx={{ mb: 1, mt: 3 }}>Number of unopened cells </InputLabel>
 
         <Grid container direction="row">
-          <FormControl sx={{ width: "25ch", mb: 5 }} variant="outlined">
+          <FormControl sx={{ width: "25ch", mb: 5 }} variant="outlined" >
             <OutlinedInput
               value={this.state.num1}
               onChange={this._changeNum1}

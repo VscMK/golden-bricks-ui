@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from '../messageSlice/messageSlice';
 import AirpayService from "../../services/airpay-service/airpayService";
+import { useDispatch } from 'react-redux';
  
 
 
@@ -16,7 +17,7 @@ export const getAirpays = createAsyncThunk(
     }
   );
 
-  export const addAirpay = createAsyncThunk(
+export const addAirpay = createAsyncThunk(
     "airpays/addAirpay",
     async ({ name, locationName, noColonies, fence, electricity }, thunkAPI) => {
       try {
@@ -101,7 +102,7 @@ const airpaySlice = createSlice({
     state.status = 'failed';
     },
   }
-    
+ 
 });
 
 export default airpaySlice.reducer;

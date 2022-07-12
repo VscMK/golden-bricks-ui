@@ -11,15 +11,14 @@ import { addAirpay } from '../../../slices/airpaySlice/airpaySlice';
 import { useNavigate } from "react-router-dom";
 import Header from '../../../components/Header';
 
-const CreateAirpayForm = (props) => {
+function CreateAirpayForm()  {
 
- if (props.apiary) {
-}
+ 
 
   const [loading, setLoading] = useState(false);
 //   const { isLoggedIn } = useSelector((state => state.auth));
 //   const { message } = useSelector((state => state.message));
-  const dispatch = useDispatch();
+  let dispatch = useDispatch();
   let navigate = useNavigate();
 
     const INITIAL_VALUES = {
@@ -38,19 +37,30 @@ const CreateAirpayForm = (props) => {
         electricity: Yup.string().required('Electricity field is required')
       });
     
-    const handleSubmit = (formValue) => {
-      const { name, locationName, noColonies, fence, electricity } = formValue;
-      setLoading(true);
-      dispatch(addAirpay({ name, locationName, noColonies, fence, electricity }))
-        .unwrap()
-        .then(() => {
-          window.location.reload();
-        })
-        .catch(() => {
-          setLoading(false);
-        });
-        return navigate('/airpays-page');
-    };
+     
+
+     const handleSubmit =  (formValue)=> {
+      
+       const { name, 
+        locationName, 
+        noColonies,
+         fence, 
+         electricity }=formValue;
+
+         setLoading(true);
+      dispatch(addAirpay( {name, locationName, noColonies, fence,electricity} ))
+      .unwrap().then(() => {
+        //window.location.reload();
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+    
+      
+  
+         return navigate('/airpays-page');
+        
+     };
 
 
   return (
@@ -64,8 +74,8 @@ const CreateAirpayForm = (props) => {
               validationSchema={VALIDATION_SCHEMA}
               onSubmit={handleSubmit}
                 >
-                  {(formik)=> (
-              <Form onSubmit={formik.handleSubmit}>
+                 {(formik)=>(
+              <Form onSubmit={handleSubmit}>
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
                     <Typography variant='h4' component='h2' gutterBottom >
@@ -76,6 +86,7 @@ const CreateAirpayForm = (props) => {
                     <TextfieldWrapper 
                     name='name'
                     label={'Name:'} 
+                   
                     onChange={formik.handleChange}
                     />
                   </Grid>
@@ -83,6 +94,7 @@ const CreateAirpayForm = (props) => {
                     <TextfieldWrapper 
                     name='locationName'
                     label={'Location:'} 
+                   
                     onChange={formik.handleChange}
                     />
                    </Grid>
@@ -90,6 +102,7 @@ const CreateAirpayForm = (props) => {
                     <TextfieldWrapper 
                     name='noColonies'
                     label={'Number of colonies:'} 
+                   
                     onChange={formik.handleChange}
                     />
                   </Grid>
@@ -97,6 +110,7 @@ const CreateAirpayForm = (props) => {
                     <TextfieldWrapper 
                     name='fence'
                     label={'Fence:'}
+                   
                     onChange={formik.handleChange}
                     />
                   </Grid>
@@ -104,6 +118,7 @@ const CreateAirpayForm = (props) => {
                     <TextfieldWrapper 
                     name='electricity'
                     label={'Electricity:'}
+                    
                     onChange={formik.handleChange}
                     />
                   </Grid>
