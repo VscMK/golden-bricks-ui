@@ -4,6 +4,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@material-ui/core/FormControl";
 import { Grid } from "@material-ui/core";
 import { InputLabel } from "@mui/material";
+import TextFields from "../inspection-formular-textfield";
 
 class Varroa extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Varroa extends React.Component {
       num1: 0,
       num2: 0,
       result: 0,
+     
     };
     this._changeNum1 = this._changeNum1.bind(this);
     this._changeNum2 = this._changeNum2.bind(this);
@@ -35,8 +37,7 @@ class Varroa extends React.Component {
       });
     }
   }
-
-  render() {
+   render() {
     return (
       <Grid containter direction="row">
         <Typography
@@ -50,12 +51,14 @@ class Varroa extends React.Component {
 
         <Grid container direction="row">
           <FormControl sx={{ width: "25ch", mb: 5 }} variant="outlined">
+           
             <OutlinedInput
               value={this.state.num1}
               onChange={this._changeNum1}
             />
           </FormControl>
         </Grid>
+        
         <InputLabel sx={{ mb: 1, mt: 3 }}>Net bees weight</InputLabel>
 
         <Grid container direction="row">
@@ -79,7 +82,7 @@ class Varroa extends React.Component {
         </Typography>
 
         <Typography
-          sx={{ mb: 2, mt: 2, fontFamily: "Helvetica", fontSize: "24px" }}
+          sx={{ mb: 2, mt: 2, fontFamily: "Helvetica", fontSize: "24px" }} name="varoa"
         >
           {this.state.result}
         </Typography>

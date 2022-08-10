@@ -6,7 +6,7 @@ import { addGondola, getGondolas } from '../../slices/gondolas-slice/gondolasSli
 import { useDispatch, useSelector } from 'react-redux';
 import GondolasTable from './gondolas-table';
 
-const GondolasPage = () => {
+const GondolasPage = (props) => {
 
   const apiaryId = window.localStorage.getItem('apiaryId');
   const [loading, setLoading] = useState(false);
@@ -34,12 +34,12 @@ const GondolasPage = () => {
           <Button  
           className={classes.btn}
           onClick={() => {
-            // return navigate('/create-gondola');
-            // setLoading(true);
+           //  return navigate('/create-gondola')
+            //setLoading(true);
             dispatch(addGondola({ id }))
               .unwrap()
               .then(() => {
-                // props.history.push('/airpays-page');
+                 //props.history.push('/airpays-page');
                 // window.location.reload();
               })
               .catch(() => {

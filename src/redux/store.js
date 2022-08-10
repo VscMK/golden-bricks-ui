@@ -5,7 +5,8 @@ import airpayReducer from '../slices/airpaySlice/airpaySlice';
 //import singleApiaryReducer  from '../slices/singleApiarySlice/singleApiarySlice';
 import gondolasSlice from "../slices/gondolas-slice/gondolasSlice";
 import inspectionsSlice from "../slices/inspectionSlice/inspectionSlice";
-
+import colonySlice from "../slices/colony-slice";
+import queenSlice from "../slices/queenSlice";
 
 export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
@@ -17,5 +18,7 @@ export const store = configureStore({
         airpays: airpayReducer,
         inspections: inspectionsSlice,
         gondolas: gondolasSlice,
+        colonies: colonySlice,
+        queen: queenSlice,
     },
 });

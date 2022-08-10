@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Grid from '@material-ui/core/Grid';
-import { Container, Typography } from '@material-ui/core';
+import { Container, Typography,FormControl,FormGroup } from '@material-ui/core';
 import TextfieldWrapper from '../../../components/form-components/TextField';
 import ButtonWrapper from '../../../components/form-components/Button';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,13 @@ import { addAirpay } from '../../../slices/airpaySlice/airpaySlice';
 // import { clearMessage } from '../../../../slices/messageSlice/messageSlice';
 import { useNavigate } from "react-router-dom";
 import Header from '../../../components/Header';
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import DisabledByDefaultRoundedIcon from "@mui/icons-material/DisabledByDefaultRounded";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
+import { Field } from "formik";
+import { RadioGroup } from "formik-mui";
+import FormLabel from "@material-ui/core/FormLabel";
 
 function CreateAirpayForm()  {
 
@@ -76,7 +83,9 @@ function CreateAirpayForm()  {
                 >
                  {(formik)=>(
               <Form onSubmit={handleSubmit}>
+
                 <Grid container spacing={1}>
+
                   <Grid item xs={12}>
                     <Typography variant='h4' component='h2' gutterBottom >
                       Create new apiary: 
@@ -107,21 +116,67 @@ function CreateAirpayForm()  {
                     />
                   </Grid>
                  <Grid item xs={12}>
-                    <TextfieldWrapper 
-                    name='fence'
-                    label={'Fence:'}
-                   
-                    onChange={formik.handleChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextfieldWrapper 
-                    name='electricity'
-                    label={'Electricity:'}
+                 
+                      <FormControl>
+                        <FormLabel>Fence</FormLabel>
+                        <Field component={RadioGroup} name="fence" row>
+                          <FormControlLabel
+                            value="Y"
+                            control={
+                              <Radio
+                                onChange={formik.handleChange}
+                                icon={<CheckBoxIcon />}
+                                checkedIcon={<CheckBoxIcon />}
+                              />
+                            }
+                            label="Yes"
+                          />
+                          <FormControlLabel
+                            value="N"
+                            control={
+                              <Radio
+                                onChange={formik.handleChange}
+                                icon={<DisabledByDefaultRoundedIcon />}
+                                checkedIcon={<DisabledByDefaultRoundedIcon />}
+                              />
+                            }
+                            label="No"
+                          />
+                        </Field>
+                      </FormControl>
                     
-                    onChange={formik.handleChange}
-                    />
                   </Grid>
+
+                  <Grid item xs={12}>
+                  <FormControl>
+                        <FormLabel>Electricity</FormLabel>
+                        <Field component={RadioGroup} name="electricity" row>
+                          <FormControlLabel
+                            value="Y"
+                            control={
+                              <Radio
+                                onChange={formik.handleChange}
+                                icon={<CheckBoxIcon />}
+                                checkedIcon={<CheckBoxIcon />}
+                              />
+                            }
+                            label="Yes"
+                          />
+                          <FormControlLabel
+                            value="N"
+                            control={
+                              <Radio
+                                onChange={formik.handleChange}
+                                icon={<DisabledByDefaultRoundedIcon />}
+                                checkedIcon={<DisabledByDefaultRoundedIcon />}
+                              />
+                            }
+                            label="No"
+                          />
+                        </Field>
+                      </FormControl>
+                      </Grid>
+
                   <Grid item xs={12}>
                     <ButtonWrapper disabled={loading} >
                     {loading ? (

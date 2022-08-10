@@ -11,6 +11,10 @@ import CreateAirpayForm from './pages/airpays-page/create-airpay-form';
 import UpdateApiaryForm from './pages/update-apiary-page/update-apiary-form';
 import GondolasPage from './pages/gondolas-page';
 import CreateInspectionsForm from './pages/inspections-page/create-inspections-form';
+import ColonyPage from './pages/colony-page';
+import CreateColonyForm from './pages/colony-page/create-colony-form';
+import QueenPage from './pages/queen-page';
+import CreateQueenForm from './pages/queen-page/create-queen-page';
 //import CreateGondolaForm from './pages/create-gondola-page/create-gondola-form';
 
 function App() {
@@ -24,10 +28,15 @@ function App() {
         <Route path='/users-page' element={<UsersPage />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/inspections-page' element={<InspectionsPage />} />
+        <Route path="/colony-page" element={<ColonyPage/>}/>
         <Route path='/create-apiary' element={<CreateAirpayForm />} />
         <Route path='/update-apiary' element={<UpdateApiaryForm />} />
         <Route path='/gondolas-page' element={<GondolasPage />} />  
+        <Route path='/create-colony' element={<CreateColonyForm/>}/>
+        <Route path='/queen-page' element={<QueenPage/>}/>
+        <Route path='/create-queen' element={<CreateQueenForm/>}/>
         <Route path='/create-inspections' element={<CreateInspectionsForm/>}/>
+
 
         
         {/* <div className="App">

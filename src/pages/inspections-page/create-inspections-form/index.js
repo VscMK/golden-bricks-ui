@@ -24,7 +24,7 @@ import DisabledByDefaultRoundedIcon from "@mui/icons-material/DisabledByDefaultR
 import IconNumbers from "../../../components/IconNumbers";
 import YesNo from "../../../components/YesNoButtons";
 import { Form, Formik } from "formik";
-import Formular from "../../../components/inspection-formular";
+
 import SaveButton from "../../../components/SaveButton";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -227,7 +227,7 @@ function CreateInspectionsForm() {
                 ) : (
                   ""
                 )}
-              </SaveButton>
+             inspection </SaveButton>
 
               <div style={{ marginTop: "1em" }}>
                 <TextFields
@@ -710,7 +710,7 @@ function CreateInspectionsForm() {
                 </AccordionSummary>
                 <AccordionDetails>
                   <FormGroup row style={{ margin: 20 }}>
-                    <Varroa onChange={formik.handleChange} />
+                    <Varroa onChange={formik.handleChange} name="varoa"/>
                     <FormGroup row style={{ marginLeft: 20 }}>
                       <NaturalVarroa onChange={formik.handleChange} />
                     </FormGroup>

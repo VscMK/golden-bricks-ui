@@ -42,7 +42,7 @@ const SaveButton= ({
           className={classes.btn}
           disableElevation
           onClick={handleSubmit} >
-           Save inspection
+           Save  
            {children}
           </Button>
        

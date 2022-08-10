@@ -66,6 +66,8 @@ const Header = (props) => {
                    >
                      <Tab label='APIARYS' href="/airpays-page" />
                      <Tab label='USERS' href="/users-page"/>
+                     <Tab label="COLONY" href="/colony-page"/>
+                     <Tab label="QUEEN" href="/queen-page"/>
                      <Tab label='INSPECTIONS' href="/inspections-page"/>
                    </Tabs>
                    <PowerSettingsNewIcon 

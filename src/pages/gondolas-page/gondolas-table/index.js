@@ -16,13 +16,18 @@ import {
   import { red, green } from '@mui/material/colors';
   import { useSelector,useDispatch } from 'react-redux';
   import { useNavigate } from 'react-router';
-import gondolasSlice, { deleteGondola, getGondolas } from '../../../slices/gondolas-slice/gondolasSlice';
+  import { updateApiary } from '../../../slices/airpaySlice/airpaySlice';
+import  { gondolasSlice,deleteGondola, getGondolas } from '../../../slices/gondolas-slice/gondolasSlice';
+import { getAirpays } from '../../../slices/airpaySlice/airpaySlice';
+
 
 const GondolasTable = (props) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { gondolas } = useSelector((state => state.gondolas));
+  const apiary= useSelector((state=>state.apiary))
+ 
 
   useEffect (() => {
     setLoading(true);
@@ -37,18 +42,18 @@ const GondolasTable = (props) => {
 
   const handleEdit = (apiary) => {
     window.localStorage.setItem('apiary', apiary.apiary_id);
-    // dispatch(saveApiary(apiary));
-    // // .unwrap()
-    // .then(() => {
-    // })
-    // .catch(e => window.alert('ERROR ', e)
-    // );
+     dispatch(updateApiary(apiary))
+    .unwrap()
+    .then(() => {
+    })
+    .catch(e => window.alert('ERROR ', e)
+     );
     return navigate('/update-apiary');
   }
 
   const navigateToColonies = (gondolaId) => {
     window.localStorage.setItem('gondolaId', gondolaId);
-    return navigate('/gondolas-page');
+    return navigate('/colony-page');
   }
 
   const handleDelete = (gondolaId) => {
@@ -84,7 +89,7 @@ const GondolasTable = (props) => {
             <TableRow key={row.name}>
                 <TableCell align="left">{row.apiary_id}</TableCell>
                 <TableCell align="left">{row.gondola_id}</TableCell>
-                <TableCell align="left">{row.Colonies.length}</TableCell>
+                <TableCell align="left">{row.no_colonies}</TableCell>
               <TableCell align="left" style={{width: '5%'}}>
                 <Button onClick={e => handleEdit(row)}>
                   <EditIcon color='primary' fontSize="large" />
