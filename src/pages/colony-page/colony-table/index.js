@@ -30,8 +30,7 @@ const ColoniesTable = (props) => {
     setLoading(true);
   dispatch(getColonies())
     .unwrap()
-    .then(() => {
-    })
+    .then(() => {})
     .catch(() => {
       setLoading(false);
     });
@@ -77,6 +76,7 @@ const ColoniesTable = (props) => {
           <TableRow>
             <TableCell align='left'>Apiary ID</TableCell>
             <TableCell align='left'>Gondola ID</TableCell>
+            <TableCell align='left'>Queen ID</TableCell>
             <TableCell align="left">Number of boxes</TableCell>
             <TableCell align="left">Queen alarm&nbsp;</TableCell>
             
@@ -87,6 +87,7 @@ const ColoniesTable = (props) => {
             <TableRow key={row.name}>
               <TableCell align='left'>{row.apiary_id}</TableCell>
              <TableCell align='left'>{row.gondola_id}</TableCell>
+             <TableCell align="left">{row.queen_id}</TableCell>
               <TableCell align="left">{row.no_boxes}</TableCell>
               <TableCell align="left">{row.queen_alarm}</TableCell>
              

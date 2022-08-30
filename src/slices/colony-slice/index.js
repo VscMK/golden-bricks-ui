@@ -8,11 +8,14 @@ export const getColonies = createAsyncThunk(
     async (thunkAPI) => {
       try{
         const response = await ColonyService.getColonies();
+       console.log(response)
         return response;
       } catch (error) {
         return error?.response;
       }
+      
     }
+   
   );
 
   export const addColony = createAsyncThunk(

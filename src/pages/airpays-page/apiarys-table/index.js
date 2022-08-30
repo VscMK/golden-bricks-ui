@@ -48,6 +48,7 @@ const ApiarysTable = (props) => {
 
   const navigateToColonies = (apiary) => {
     window.localStorage.setItem('apiaryId', apiary.apiary_id);
+    
     // dispatch(saveApiary(apiary));
     // // .unwrap()
     // .then(() => {
@@ -73,6 +74,7 @@ const ApiarysTable = (props) => {
       setLoading(false);
     });
   }
+  // console.log("ap", apiaries)
 
   return (
     <Grid style={{ marginTop: '70px' }}>

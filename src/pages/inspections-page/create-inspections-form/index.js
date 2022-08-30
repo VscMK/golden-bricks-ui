@@ -24,10 +24,9 @@ import DisabledByDefaultRoundedIcon from "@mui/icons-material/DisabledByDefaultR
 import IconNumbers from "../../../components/IconNumbers";
 import YesNo from "../../../components/YesNoButtons";
 import { Form, Formik } from "formik";
-
 import SaveButton from "../../../components/SaveButton";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addInspection } from "../../../slices/inspectionSlice/inspectionSlice";
 import { useFormikContext } from "formik";
 import { Button, makeStyles } from "@material-ui/core";
@@ -65,6 +64,8 @@ function CreateInspectionsForm() {
   const [currentButton, setCurrentbutton] = React.useState(null);
   const dispatch = useDispatch();
   let navigate = useNavigate();
+  const colonies = useSelector((state) => state.colonies);
+  const apiary = useSelector((state)=>state.apiary);
 
   const onButtonClicked = (id) => {
     setCurrentbutton(currentButton === id ? null : id);

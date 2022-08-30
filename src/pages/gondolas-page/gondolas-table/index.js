@@ -26,9 +26,14 @@ const GondolasTable = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { gondolas } = useSelector((state => state.gondolas));
+  const { airpays } = useSelector((state => state.airpays));
+  
   const apiary= useSelector((state=>state.apiary))
- 
-
+  const singleApiary = airpays && airpays.filter(item=> item.apiary_id===parseInt(window.localStorage.getItem("apiaryId")))[0];
+  console.log("airpays",airpays);
+    console.log("ap", singleApiary);
+  console.log("row", window.localStorage.getItem("apiaryId"));
+  console.log("gons", gondolas);
   useEffect (() => {
     setLoading(true);
   dispatch(getGondolas())
@@ -40,14 +45,25 @@ const GondolasTable = (props) => {
     });
   },[]);
 
-  const handleEdit = (apiary) => {
-    window.localStorage.setItem('apiary', apiary.apiary_id);
-     dispatch(updateApiary(apiary))
+  useEffect (() => {
+    setLoading(true);
+  dispatch(getAirpays())
     .unwrap()
     .then(() => {
     })
-    .catch(e => window.alert('ERROR ', e)
-     );
+    .catch(() => {
+      setLoading(false);
+    });
+  },[]);
+
+  const handleEdit = (apiary) => {
+    window.localStorage.setItem('apiary', apiary.apiary_id);
+    //  dispatch(updateApiary(apiary))
+    // .unwrap()
+    // .then(() => {
+    // })
+    // .catch(e => window.alert('ERROR ', e)
+    //  );
     return navigate('/update-apiary');
   }
 
@@ -89,8 +105,8 @@ const GondolasTable = (props) => {
             <TableRow key={row.name}>
                 <TableCell align="left">{row.apiary_id}</TableCell>
                 <TableCell align="left">{row.gondola_id}</TableCell>
-                <TableCell align="left">{row.no_colonies}</TableCell>
-              <TableCell align="left" style={{width: '5%'}}>
+                <TableCell align="left">{singleApiary.no_colonies}</TableCell>
+               <TableCell align="left" style={{width: '5%'}}>
                 <Button onClick={e => handleEdit(row)}>
                   <EditIcon color='primary' fontSize="large" />
                 </Button>
@@ -99,7 +115,7 @@ const GondolasTable = (props) => {
                 <Button onClick={e => navigateToColonies(row.gondola_id)}>
                   <AddBoxIcon sx={{ color: green[500] }} fontSize="large"/>
                 </Button>
-              </TableCell>
+              </TableCell> 
               <TableCell align="left" style={{width: '5%'}}>
                 <Button onClick={e => handleDelete(row.gondola_id)}>
                   <DeleteIcon sx={{ color: red[500] }} fontSize="large"/>

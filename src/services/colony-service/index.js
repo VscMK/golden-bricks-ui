@@ -15,7 +15,7 @@ axios.interceptors.request.use(
 
 const getColonies = () => {
     return axios
-    .get(API_URL + 'colonies')
+    .get(API_URL + 'colony')
     .then((response) => {
       return response.data;
     });
@@ -25,7 +25,7 @@ const addColony = (apiary_id, gondola_id,no_boxes,
   queen_id,
   queen_alarm) => {
     return axios
-      .post(API_URL + 'colonies/create', {apiary_id, gondola_id,no_boxes,
+      .post(API_URL + 'colony/create', {apiary_id, gondola_id,no_boxes,
         queen_id,
         queen_alarm})
       .then((response) => {
@@ -36,7 +36,7 @@ const addColony = (apiary_id, gondola_id,no_boxes,
     queen_id,
     queen_alarm) => {
     return axios
-    .put(API_URL + `colonies/update/${id}`,
+    .put(API_URL + `colony/update/${id}`,
     {no_boxes,
       queen_id,
       queen_alarm})
@@ -47,7 +47,7 @@ const addColony = (apiary_id, gondola_id,no_boxes,
 
 const deleteColony = (id) => {
   return axios
-  .delete(API_URL + `colonies/delete/${id}`)
+  .delete(API_URL + `colony/delete/${id}`)
   .then((response) => {
     return response.data;
   });
