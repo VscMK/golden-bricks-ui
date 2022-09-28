@@ -27,6 +27,13 @@ const addInspection = (
   number_occupied_combs,
   number_brood_combs,
   queen_status,
+  queen_loss_signs,
+    eggs,
+    larvae,
+    bee_pupae,
+    adult_queen,
+    cells,
+    queen_replacement,
   queen_status_change_reason,
   swarming_tendency,
   varoa,
@@ -54,6 +61,13 @@ const addInspection = (
       number_occupied_combs,
       number_brood_combs,
       queen_status,
+      queen_loss_signs,
+    eggs,
+    larvae,
+    bee_pupae,
+    adult_queen,
+    cells,
+    queen_replacement,
       queen_status_change_reason,
       swarming_tendency,
       varoa,
@@ -79,13 +93,25 @@ const addInspection = (
 };
 
 const updateInspection = (
-   id, number_of_boxes,number_occupied_combs,number_brood_combs,queen_status,queen_status_change_reason,swarming_tendency,
+   id, number_of_boxes,number_occupied_combs,number_brood_combs,queen_status,queen_loss_signs,
+   eggs,
+   larvae,
+   bee_pupae,
+   adult_queen,
+   cells,
+   queen_replacement,queen_status_change_reason,swarming_tendency,
     varoa,natural_varoa,colony_loss,pollen,honey,hygiene,bees_gentleness,food,food_type,food_ammount,health_condition,attention_needed,attention_needed_time,
   total_weight,comment
 ) => {
   return axios
     .put(API_URL + `inspection/update/${id}`, {
-       number_of_boxes,number_occupied_combs,number_brood_combs,queen_status,queen_status_change_reason,swarming_tendency,
+       number_of_boxes,number_occupied_combs,number_brood_combs,queen_status,queen_loss_signs,
+       eggs,
+       larvae,
+       bee_pupae,
+       adult_queen,
+       cells,
+       queen_replacement,queen_status_change_reason,swarming_tendency,
         varoa,natural_varoa,colony_loss,pollen,honey,hygiene,bees_gentleness,food,food_type,food_ammount,health_condition,attention_needed,attention_needed_time,
       total_weight,comment
     })

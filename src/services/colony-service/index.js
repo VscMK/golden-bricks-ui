@@ -21,25 +21,25 @@ const getColonies = () => {
     });
 };
 
-const addColony = (apiary_id, gondola_id,no_boxes,
-  queen_id,
-  queen_alarm) => {
+const addColony = (apiaryId, gondolaId,noBoxes,
+  queen,
+  queenAlarm) => {
     return axios
-      .post(API_URL + 'colony/create', {apiary_id, gondola_id,no_boxes,
-        queen_id,
-        queen_alarm})
+      .post(API_URL + 'colony/create', {apiaryId, gondolaId,noBoxes,
+        queen,
+        queenAlarm})
       .then((response) => {
         return response.data;
       });
   };
-  const updateColony = (id,no_boxes,
-    queen_id,
-    queen_alarm) => {
+  const updateColony = (id,noBoxes,
+    queen,
+    queenAlarm) => {
     return axios
     .put(API_URL + `colony/update/${id}`,
-    {no_boxes,
-      queen_id,
-      queen_alarm})
+    {noBoxes,
+      queen,
+      queenAlarm})
     .then((response) => {
       return response.data;
     });

@@ -20,13 +20,13 @@ export const getColonies = createAsyncThunk(
 
   export const addColony = createAsyncThunk(
     "colonies/addColony",
-    async ({ apiary_id, gondola_id, no_boxes,
-    queen_id,
-    queen_alarm }, thunkAPI) => {
+    async ({ apiaryId, gondolaId, noBoxes,
+    queen,
+    queenAlarm }, thunkAPI) => {
       try {
-        const response = await ColonyService.addColony(apiary_id, gondola_id, no_boxes,
-          queen_id,
-          queen_alarm);
+        const response = await ColonyService.addColony(apiaryId, gondolaId, noBoxes,
+          queen,
+          queenAlarm);
         return response.data;
      } catch (error) {
       return error?.response;   
@@ -35,13 +35,13 @@ export const getColonies = createAsyncThunk(
   );
   export const updateColony = createAsyncThunk(
     'colonies/editColony',
-    async ({ id, no_boxes,
-      queen_id,
-      queen_alarm }, thunkAPI) => {
+    async ({ id, noBoxes,
+      queen,
+      queenAlarm }, thunkAPI) => {
         try {
-          const response = await ColonyService.updateColony(id,no_boxes,
-            queen_id,
-            queen_alarm);
+          const response = await ColonyService.updateColony(id,noBoxes,
+            queen,
+            queenAlarm);
           return response.data;
        } catch (error) {
         return error?.response;   

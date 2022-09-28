@@ -24,15 +24,17 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { width } from '@mui/system';
-import Calculation from '../../../components/AgeCalc';
 
 
-const CreateQueenForm=()=>{
+
+function CreateQueenForm(){
   const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
   let navigate = useNavigate();
-  const colonies = useSelector((state=>state.colonies))
+  const {colonies}= useSelector((state)=>state.colonies)
   const [value, setValue] = React.useState(new Date());
+  const singleColony= colonies && colonies.filter(item=>item.colony_id===parseInt(window.localStorage.getItem('colonyId')))[0]
+  console.log(colonies)
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -63,17 +65,25 @@ const CreateQueenForm=()=>{
       },
     },
   });
-
+  React.useEffect(() => {
+    setLoading(true);
+    dispatch(getColonies())
+      .unwrap()
+      .then(() => {})
+      .catch(() => {
+        setLoading(false);
+      });
+  }, []);
 
 
   const INITIAL_VALUES={
     
-    apiary_id:"" ,
-    gondola_id:"" ,
-    colony_id:"",
+    apiary_id: singleColony.apiary_id,
+    gondola_id: singleColony.gondola_id ,
+    colony_id: singleColony.colony_id,
     color_plate: "",
-    number_on_plate: "",
-    queen_number: "",
+    number_on_plate: 2,
+    queen_number: "MK-9-1-275-2019",
     clipped: "",
     mating_status: "",
     marked: ""
@@ -81,7 +91,9 @@ const CreateQueenForm=()=>{
 
   const handleSubmit=(formValue)=>{
     const{
-      apiary_id,gondola_id,colony_id,
+      apiary_id,
+      gondola_id,
+      colony_id,
       color_plate,
     number_on_plate,
     queen_number,
@@ -104,7 +116,7 @@ const CreateQueenForm=()=>{
     .catch(()=>{
       setLoading(false);
     })
-    
+    return navigate("/queen-page");
     
   }
 
@@ -320,53 +332,28 @@ return (
                   </Field>
                 </Grid>
               </Grid>
-              <Grid container direction="row">
+             
                 <Grid item sx={3}>
-                 <Calculation/>
+                  <TextField
+                  name="number_on_plate"
+                  placeholder="Number on plate"
+                  type={"number"}
+                 
+                  variant="outlined"
+                  style={{
+                    width: 200,
+                    marginTop: 5,
+                    marginBottom: 2,
+                    height: 40,
+                    fontFamily: "Helvetica",
+                    fontSize: 20,
+                  }}
+                  onChange={formik.handleChange}
+                /> 
                 </Grid>
 
-                <Grid item xs={6} style={{ marginLeft: 50 }}>
-                  <Field
-                    label="Genotype"
-                    onChange={formik.handleChange}
-                    name="genotype"
-                    component="select"
-                    variant="outline"
-                    style={{
-                      width: 300,
-                      height: 50,
-                      fontSize: 17,
-                      fontFamily: "Helvetica",
-                    }}
-                  >
-                    <option style={{}} value="African">
-                      African (Apis mellifera scutellata)
-                    </option>
-                    <option value="Africanized">Africanized (hybrid)</option>
-                    <option value="Asiatic">Asiatic (Apis cerana)</option>
-                    <option value="Buckfast">
-                      Buckfast (Apis mellifera adami)
-                    </option>
-                    <option value="Carnica">
-                      Carnica (Apis mellifera carnica)
-                    </option>
-                    <option value="Caucasian">
-                      Caucasian (Apis mellifera caucasian)
-                    </option>
-                    <option value="European dark">
-                      European dark (Apis mellifera mellifera)
-                    </option>
-                    <option value="Hybrid">Hybrid</option>
-                    <option value="Italian">
-                      Italian (Apis mellifera liguastica)
-                    </option>
-                    <option value="Koschevnikovi">
-                      Koschevnikovi (Apis koschevnikovi)
-                    </option>
-                    <option value="Other">Other</option>
-                  </Field>
-                </Grid>
-              </Grid>
+               
+             
             </div>
             
           </Form>

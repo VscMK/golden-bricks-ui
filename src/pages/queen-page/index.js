@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Container,
   Grid,
@@ -8,12 +8,20 @@ import {
 import Header from '../../components/Header';
 
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getColonies } from '../../slices/colony-slice';
+import QueenTable from './queen-table';
 
 
 function QueenPage () {
-  
+  const [loading, setLoading] = React.useState(false);
+  const dispatch= useDispatch();
   const navigate = useNavigate();
 
+  const navigateToColonies = (colony_id) => {
+    window.localStorage.setItem('colonyId', colony_id);
+    return navigate('/create-queen');
+  }
   const useStyles = makeStyles({
     btn: {
       fontSize: 15,
@@ -25,21 +33,40 @@ function QueenPage () {
     }
   });
   const classes = useStyles();
+  const {colonies} = useSelector((state)=>state.colonies)
+  
+  const singleColonyId = parseInt(window.localStorage.getItem('colonyId'))
+
+console.log("da",colonies)
+
+  React.useEffect (() => {
+    setLoading(true);
+  dispatch(getColonies())
+    .unwrap()
+    .then(() => {
+    })
+    .catch(() => {
+      setLoading(false);
+    });
+  },[]);
   return (
+  
     <Container>
          <Header />
          <Grid style={{ marginTop: '100px' }}>
           <Button  
           className={classes.btn}
           onClick={() => {
-            return navigate('/create-queen');
+            return navigateToColonies(singleColonyId);
           }} >
             + new Queen
           </Button>
         </Grid>
 
-        
-        
+         <Grid>
+          <QueenTable/>
+        </Grid> 
+         
     </Container>
   )
 }

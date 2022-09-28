@@ -30,10 +30,7 @@ const GondolasTable = (props) => {
   
   const apiary= useSelector((state=>state.apiary))
   const singleApiary = airpays && airpays.filter(item=> item.apiary_id===parseInt(window.localStorage.getItem("apiaryId")))[0];
-  console.log("airpays",airpays);
-    console.log("ap", singleApiary);
-  console.log("row", window.localStorage.getItem("apiaryId"));
-  console.log("gons", gondolas);
+  
   useEffect (() => {
     setLoading(true);
   dispatch(getGondolas())

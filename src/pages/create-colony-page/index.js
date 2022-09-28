@@ -10,4 +10,4 @@ const CreateColonyPage = () =>{
   )
 }
 
-export default CreateColonyForm;
+export default CreateColonyPage;

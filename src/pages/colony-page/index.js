@@ -35,8 +35,9 @@ function ColonyPage () {
   const dispatch = useDispatch();
 
   const { gondolas } = useSelector((state => state.gondolas));
-  const singleGondolaId = parseInt(window.localStorage.getItem("gondolaId"))
 
+  const singleGondolaId = parseInt(window.localStorage.getItem("gondolaId"))
+console.log(gondolas)
   
   React.useEffect (() => {
     setLoading(true);
@@ -48,6 +49,7 @@ function ColonyPage () {
       setLoading(false);
     });
   },[]);
+  
   return (
     <Container>
          <Header />

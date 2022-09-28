@@ -16,7 +16,7 @@ import Calculations from "../../../components/Calculations";
 import NaturalVarroa from "../../../components/NaturalVarroa";
 import Varroa from "../../../components/Varroa10g";
 import IconButtons from "../../../components/IconButton";
-import { InputLabel } from "@mui/material";
+import { Box, InputLabel, MenuItem,  } from "@mui/material";
 
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { IconButton } from "@mui/material";
@@ -42,9 +42,11 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
-
+import { Select } from "formik-mui";
 import { Field } from "formik";
 import { RadioGroup } from "formik-mui";
+import { getColonies } from "../../../slices/colony-slice";
+import { getAirpays } from "../../../slices/airpaySlice/airpaySlice";
 
 const BeesFood = [{ label: "Pollen" }, { label: "Nectar" }];
 const attention = [
@@ -62,10 +64,45 @@ function CreateInspectionsForm() {
   const [needed, setAttention] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
   const [currentButton, setCurrentbutton] = React.useState(null);
+  const [getApiary, setApiary]=React.useState([]);
+  const [getColony,setColony]=React.useState([]);
   const dispatch = useDispatch();
   let navigate = useNavigate();
-  const colonies = useSelector((state) => state.colonies);
-  const apiary = useSelector((state)=>state.apiary);
+  
+  const {colonies} = useSelector((state) => state.colonies);
+  const apiary =[...new Set(colonies.map((item)=>item.apiary_id))];
+
+  const handleApiary=(event,value)=>{
+  
+    let colony =colonies.filter((state)=>state.apiary_id===value)
+    colony=[... new Set(colony.map((item)=>item.colony_id))];
+    colony.sort()
+    setColony(colony)
+    
+  };
+  
+
+  React.useEffect (() => {
+    setLoading(true);
+  dispatch(getAirpays())
+    .unwrap()
+    .then(() => {
+    })
+    .catch(() => {
+      setLoading(false);
+    });
+  },[]);
+
+  React.useEffect (() => {
+    setLoading(true);
+  dispatch(getColonies())
+    .unwrap()
+    .then(() => {
+    })
+    .catch(() => {
+      setLoading(false);
+    });
+  },[]);
 
   const onButtonClicked = (id) => {
     setCurrentbutton(currentButton === id ? null : id);
@@ -87,6 +124,13 @@ function CreateInspectionsForm() {
     number_occupied_combs: "",
     number_brood_combs: "",
     queen_status: "",
+    queen_loss_signs:"",
+    eggs:"",
+    larvae:"",
+    bee_pupae:"",
+    adult_queen:"",
+    cells:"",
+    queen_replacement:"",
     queen_status_change_reason: "",
     swarming_tendency: "",
     varoa: "",
@@ -114,6 +158,13 @@ function CreateInspectionsForm() {
       number_occupied_combs,
       number_brood_combs,
       queen_status,
+      queen_loss_signs,
+    eggs,
+    larvae,
+    bee_pupae,
+    adult_queen,
+    cells,
+    queen_replacement,
       queen_status_change_reason,
       swarming_tendency,
       varoa,
@@ -141,6 +192,13 @@ function CreateInspectionsForm() {
         number_occupied_combs,
         number_brood_combs,
         queen_status,
+        queen_loss_signs,
+    eggs,
+    larvae,
+    bee_pupae,
+    adult_queen,
+    cells,
+    queen_replacement,
         queen_status_change_reason,
         swarming_tendency,
         varoa,
@@ -168,7 +226,7 @@ function CreateInspectionsForm() {
         setLoading(false);
       });
 
-    return navigate("/inspection/create");
+    return navigate("/inspections-page");
   };
 
   const theme = createTheme({
@@ -230,7 +288,41 @@ function CreateInspectionsForm() {
                 )}
              inspection </SaveButton>
 
-              <div style={{ marginTop: "1em" }}>
+             
+             
+                <Autocomplete name="colony_id" style={{width: "200px", }} select  onChange={(event,value)=>handleApiary(event,value)}
+                id="apiary"
+                getOptionLavel={(apiary)=>`${apiary}`}
+                isOptionEqualToValue={(option, value) => option.apiary_id === value.apiary_id}
+                options={apiary}
+                  renderOption={(props,apiary)=>(
+                    <Box component="li"  {...props} key={apiary} value={getApiary}>{apiary}
+                   
+                    </Box>
+                    
+                  )}
+                    renderInput={(params)=><TextField style={{marginTop: "10px", marginBottom: "10px"}} onChange={formik.handleChange} {...params} label="Apiary id"/>}
+                />
+                 
+               
+
+                
+               <Autocomplete id="colony" 
+               getOptionLabel={(getColony)=> `${getColony}`}
+               options={getColony}
+               isOptionEqualToValue={(option,value)=>option.apiary_id===value.apiary_id}
+               renderOption={(props, getColony)=>(
+                <Box component="li" {...props} key={getColony}>
+                {getColony}
+              </Box>)}
+                renderInput={(params)=><TextField style={{width: "200px"}} {...params} label="Colony id"/>}
+              />
+               
+                
+                
+                 
+
+                <div style={{ marginTop: "1em" }}>
                 <TextFields
                   name="number_of_boxes"
                   label="Number of Boxes"
@@ -271,9 +363,9 @@ function CreateInspectionsForm() {
                     <Grid item xs={3}>
                       <FormControl>
                         <FormLabel>no signs of queen loss</FormLabel>
-                        <Field component={RadioGroup} name="queen_status" row>
+                        <Field component={RadioGroup} name="queen_loss_signs" row>
                           <FormControlLabel
-                            value="queen loss"
+                            value="Y"
                             control={
                               <Radio
                                 onChange={formik.handleChange}
@@ -284,7 +376,7 @@ function CreateInspectionsForm() {
                             label="Yes"
                           />
                           <FormControlLabel
-                            value="no signs of queen loss"
+                            value="N"
                             control={
                               <Radio
                                 onChange={formik.handleChange}
@@ -300,9 +392,9 @@ function CreateInspectionsForm() {
 
                     <Grid item xs={3}>
                       <FormLabel>eggs</FormLabel>
-                      <Field component={RadioGroup} name="queen_status" row>
+                      <Field component={RadioGroup} name="eggs" row>
                         <FormControlLabel
-                          value="Eggs"
+                          value="Y"
                           control={
                             <Radio
                               onChange={formik.handleChange}
@@ -313,7 +405,7 @@ function CreateInspectionsForm() {
                           label="Yes"
                         />
                         <FormControlLabel
-                          value="no eggs"
+                          value="N"
                           control={
                             <Radio
                               onChange={formik.handleChange}
@@ -328,9 +420,9 @@ function CreateInspectionsForm() {
 
                     <Grid item xs={3}>
                       <FormLabel>larve</FormLabel>
-                      <Field component={RadioGroup} name="queen_status" row>
+                      <Field component={RadioGroup} name="larvae" row>
                         <FormControlLabel
-                          value="larve"
+                          value="Y"
                           control={
                             <Radio
                               onChange={formik.handleChange}
@@ -341,7 +433,7 @@ function CreateInspectionsForm() {
                           label="Yes"
                         />
                         <FormControlLabel
-                          value="no larve"
+                          value="N"
                           control={
                             <Radio
                               onChange={formik.handleChange}
@@ -356,9 +448,9 @@ function CreateInspectionsForm() {
 
                     <Grid item xs={3}>
                       <FormLabel>bee pupae</FormLabel>
-                      <Field component={RadioGroup} name="queen_status" row>
+                      <Field component={RadioGroup} name="bee_pupae" row>
                         <FormControlLabel
-                          value="bee pupae"
+                          value="Y"
                           control={
                             <Radio
                               onChange={formik.handleChange}
@@ -369,7 +461,7 @@ function CreateInspectionsForm() {
                           label="Yes"
                         />
                         <FormControlLabel
-                          value="no bee pupae"
+                          value="N"
                           control={
                             <Radio
                               onChange={formik.handleChange}
@@ -392,9 +484,9 @@ function CreateInspectionsForm() {
                   <Grid container direction="row">
                     <Grid item xs={3}>
                       <FormLabel>adult</FormLabel>
-                      <Field component={RadioGroup} name="queen_status" row>
+                      <Field component={RadioGroup} name="adult_queen" row>
                         <FormControlLabel
-                          value="Adult"
+                          value="Y"
                           control={
                             <Radio
                               onChange={formik.handleChange}
@@ -405,7 +497,7 @@ function CreateInspectionsForm() {
                           label="Yes"
                         />
                         <FormControlLabel
-                          value="not adult"
+                          value="N"
                           control={
                             <Radio
                               onChange={formik.handleChange}
@@ -420,9 +512,9 @@ function CreateInspectionsForm() {
 
                     <Grid item xs={3}>
                       <FormLabel>cell</FormLabel>
-                      <Field component={RadioGroup} name="queen_status" row>
+                      <Field component={RadioGroup} name="cells" row>
                         <FormControlLabel
-                          value="cell"
+                          value="Y"
                           control={
                             <Radio
                               onChange={formik.handleChange}
@@ -433,7 +525,7 @@ function CreateInspectionsForm() {
                           label="Yes"
                         />
                         <FormControlLabel
-                          value="no cell"
+                          value="N"
                           control={
                             <Radio
                               onChange={formik.handleChange}
@@ -450,7 +542,7 @@ function CreateInspectionsForm() {
                       <FormLabel>replacement</FormLabel>
                       <Field
                         component={RadioGroup}
-                        name="queen_status_change_reason"
+                        name="queen_replacement"
                         row
                       >
                         <FormControlLabel
@@ -469,7 +561,7 @@ function CreateInspectionsForm() {
                         />
                         <FormControlLabel
                           
-                          value="none"
+                          value="N"
                           control={
                             <Radio
                             checked={status === 2}

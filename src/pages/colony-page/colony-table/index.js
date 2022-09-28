@@ -32,23 +32,27 @@ const ColoniesTable = (props) => {
     .unwrap()
     .then(() => {})
     .catch(() => {
-      setLoading(false);
+      setLoading(false); 
     });
   },[]);
 
-  // const handleEdit = (colonies) => {
-  //   window.localStorage.setItem('colonies', colonies.colony_id);
-  //   // dispatch(updateColony(colonies))
-  //   // .unwrap()
-  //   // .then(() => {
-  //   // })
-  //   // .catch(e => window.alert('ERROR ', e)
-  //   //  );
+   const handleEdit = (colonies) => {
+    window.localStorage.setItem('colonies', colonies.colony_id);
+    // dispatch(updateColony(colonies))
+    // .unwrap()
+  // .then(() => {
+    // })
+    // .catch(e => window.alert('ERROR ', e)
+    //  );
     
-  //   return navigate('/update-colony');
-  // }
+    return navigate('/update-colony');
+   }
 
   
+  const navigateToColonies = (colonyId) => {
+    window.localStorage.setItem('colony_id', colonyId);
+    return navigate('/queen-page');
+  }
 
   const handleDelete = (colonyId) => {
     const id = parseInt(colonyId);
@@ -87,21 +91,27 @@ const ColoniesTable = (props) => {
             <TableRow key={row.name}>
               <TableCell align='left'>{row.apiary_id}</TableCell>
              <TableCell align='left'>{row.gondola_id}</TableCell>
-             <TableCell align="left">{row.queen_id}</TableCell>
+             <TableCell align="left">{row.queen}</TableCell>
               <TableCell align="left">{row.no_boxes}</TableCell>
               <TableCell align="left">{row.queen_alarm}</TableCell>
              
-              {/* <TableCell align="left" style={{width: '5%'}}>
+               <TableCell align="left" style={{width: '5%'}}>
                 <Button onClick={e => handleEdit(row)}>
                   <EditIcon color='primary' fontSize="large" />
                 </Button>
               </TableCell>
-              */}
+              
+               <TableCell align="left" style={{width: '5%'}}>
+                <Button onClick={e => navigateToColonies(row.colony_id)}>
+                <AddBoxIcon sx={{ color: green[500] }} fontSize="large"/>
+                </Button>
+              </TableCell>
               <TableCell align="left" style={{width: '5%'}}>
                 <Button onClick={e => handleDelete(row.colony_id)}>
                   <DeleteIcon sx={{ color: red[500] }} fontSize="large"/>
                 </Button>
               </TableCell>
+             
             </TableRow>
           ))}
         </TableBody>

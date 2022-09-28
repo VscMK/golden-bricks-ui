@@ -14,7 +14,9 @@ import CreateInspectionsForm from './pages/inspections-page/create-inspections-f
 import ColonyPage from './pages/colony-page';
 import CreateColonyForm from './pages/colony-page/create-colony-form';
 import QueenPage from './pages/queen-page';
-import CreateQueenForm from './pages/queen-page/create-queen-page';
+
+import UpdateColonyForm from './pages/update-colony-page/update-colony-form';
+import CreateQueenForm from './pages/queen-page/create-queen-form';
 //import CreateGondolaForm from './pages/create-gondola-page/create-gondola-form';
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
         <Route path='/queen-page' element={<QueenPage/>}/>
         <Route path='/create-queen' element={<CreateQueenForm/>}/>
         <Route path='/create-inspections' element={<CreateInspectionsForm/>}/>
+        <Route path='/update-colony' element={<UpdateColonyForm/>}/>
 
 
         

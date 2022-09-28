@@ -20,6 +20,7 @@ import {
   getColonies,
   addColony,
   deleteColony,
+  updateColony,
 } from "../../../slices/colony-slice";
 import Radio from "@mui/material/Radio";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
@@ -76,40 +77,43 @@ function CreateColonyForm() {
   }, []);
 
   
-
+  const colony=window.localStorage.getItem("colony")
+  const colonyToUpdate=colonies.find(c=>c.colony_id===parseInt(colony))
   const INITIAL_VALUES = {
-    
+    id: colony,
     apiaryId: singleGondola.apiary_id,
     gondolaId: singleGondola.gondola_id,
-    noBoxes: "",
+    noBoxes: colonyToUpdate.noBoxes,
     queen: "Y",
-    queenAlarm: "",
+    queenAlarm: colonyToUpdate.queenAlarm,
     
   };
 
   
-  
+ 
 
   const handleSubmit = (formValue) => {
     
-    const { apiaryId, gondolaId, noBoxes, queen, queenAlarm } =
+    const { id, noBoxes, queen, queenAlarm } =
       formValue;
     setLoading(true);
     dispatch(
-      addColony({
-        apiaryId,
-        gondolaId,
+      updateColony({
+        id,
         noBoxes,
         queen,
         queenAlarm,
       })
     )
       .unwrap()
-      .then(() => {})
+      .then(() => {
+        window.localStorage.removeItem('colony');
+          window.location.reload();
+      })
       .catch(() => {
         setLoading(false);
       });
-    return navigate("/colony-page");
+    
   };
   const navigateToQueen = () => {
     return navigate("/queen-page");
@@ -129,7 +133,7 @@ function CreateColonyForm() {
                 {loading ? (
                   <span className="spinner-border spinner-border-sm"></span>
                 ) : (
-                  ""
+                  "update colony"
                 )}
                 colony
               </SaveButton>
