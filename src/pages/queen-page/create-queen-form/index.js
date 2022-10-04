@@ -20,9 +20,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import DisabledByDefaultRoundedIcon from "@mui/icons-material/DisabledByDefaultRounded";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { width } from '@mui/system';
 
 
@@ -32,14 +32,13 @@ function CreateQueenForm(){
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const {colonies}= useSelector((state)=>state.colonies)
-  const [value, setValue] = React.useState(new Date());
+  
   const singleColony= colonies && colonies.filter(item=>item.colony_id===parseInt(window.localStorage.getItem('colonyId')))[0]
   console.log(colonies)
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
+  const [value, setValue] = React.useState(null);
 
+  
 
   const theme = createTheme({
     palette: {
@@ -332,13 +331,13 @@ return (
                   </Field>
                 </Grid>
               </Grid>
-             
-                <Grid item sx={3}>
-                  <TextField
+              
+              <Grid container direction='row'>
+              <Grid item md={6}>
+                <TextField
                   name="number_on_plate"
                   placeholder="Number on plate"
                   type={"number"}
-                 
                   variant="outlined"
                   style={{
                     width: 200,
@@ -349,17 +348,27 @@ return (
                     fontSize: 20,
                   }}
                   onChange={formik.handleChange}
-                /> 
-                </Grid>
-
-               
-             
-            </div>
-            
+                />
+              </Grid>
+              
+              <Grid item md={6}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="Queen's age"
+                 
+                  value={value}
+                  onChange={(newValue) => {
+                    setValue(newValue);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+              </Grid>
+              </Grid>
+              </div>
           </Form>
         )}
       </Formik>
-   
     </ThemeProvider>
   </Container>
 );

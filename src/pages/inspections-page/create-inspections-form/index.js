@@ -16,7 +16,7 @@ import Calculations from "../../../components/Calculations";
 import NaturalVarroa from "../../../components/NaturalVarroa";
 import Varroa from "../../../components/Varroa10g";
 import IconButtons from "../../../components/IconButton";
-import { Box, InputLabel, MenuItem,  } from "@mui/material";
+import { Box, InputLabel, MenuItem, OutlinedInput,  } from "@mui/material";
 
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { IconButton } from "@mui/material";
@@ -71,7 +71,29 @@ function CreateInspectionsForm() {
   
   const {colonies} = useSelector((state) => state.colonies);
   const apiary =[...new Set(colonies.map((item)=>item.apiary_id))];
+  
+  const [num1, setNum1]= React.useState(0);
+  const [num2, setNum2]= React.useState(0);
+  const [result, setResult]=React.useState(0);
+ const setFieldValue =useFormikContext();
+  const _changeNum1=(e)=>{
+      if(e.target.validity.valid){
+          
+          var newNum1 =+ e.target.value;
+          setNum1(newNum1)
+          setResult(newNum1/num2)
+      }
+  }
 
+  const _changeNum2=(e)=>{
+      if(e.target.validity.valid){
+          
+          var newNum2 =+ e.target.value;
+          setNum2(newNum2)
+          setResult(num1/newNum2)
+      }
+  }
+  
   const handleApiary=(event,value)=>{
   
     let colony =colonies.filter((state)=>state.apiary_id===value)
@@ -80,7 +102,11 @@ function CreateInspectionsForm() {
     setColony(colony)
     
   };
-  
+  React.useEffect (()=>{
+    if(num1!==0 && num2 !==0 ){
+      setFieldValue(result)
+    }
+  }, [])
 
   React.useEffect (() => {
     setLoading(true);
@@ -118,8 +144,8 @@ function CreateInspectionsForm() {
   };
 
   const INITIAL_VALUES = {
-    apiary_id: "",
-    colony_id: "",
+    apiary_id:"",
+    colony_id:"",
     number_of_boxes: "",
     number_occupied_combs: "",
     number_brood_combs: "",
@@ -290,29 +316,34 @@ function CreateInspectionsForm() {
 
              
              
-                <Autocomplete name="colony_id" style={{width: "200px", }} select  onChange={(event,value)=>handleApiary(event,value)}
+                <Autocomplete  style={{width: "200px", }} select  
+                onChange={(event,value)=>{handleApiary(event,value)}}
+                name="apiary_id"
                 id="apiary"
-                getOptionLavel={(apiary)=>`${apiary}`}
+                getOptionLavel={(apiary)=>` ${apiary}`}
                 isOptionEqualToValue={(option, value) => option.apiary_id === value.apiary_id}
                 options={apiary}
                   renderOption={(props,apiary)=>(
-                    <Box component="li"  {...props} key={apiary} value={getApiary}>{apiary}
-                   
+                    <Box component="li" {...props} key={apiary} value={getApiary}>
+                      {apiary}
+                    
                     </Box>
                     
                   )}
-                    renderInput={(params)=><TextField style={{marginTop: "10px", marginBottom: "10px"}} onChange={formik.handleChange} {...params} label="Apiary id"/>}
+                    renderInput={(params)=><TextField  style={{marginTop: "10px", marginBottom: "10px"}}  {...params} label="Apiary id"/>}
                 />
                  
                
-
+              
                 
                <Autocomplete id="colony" 
-               getOptionLabel={(getColony)=> `${getColony}`}
+               getOptionLabel={(getColony)=> ` ${getColony}`}
                options={getColony}
+               name="colony_id"
+               onChange={formik.handleChange}
                isOptionEqualToValue={(option,value)=>option.apiary_id===value.apiary_id}
                renderOption={(props, getColony)=>(
-                <Box component="li" {...props} key={getColony}>
+                <Box  component="li" {...props} key={getColony}>
                 {getColony}
               </Box>)}
                 renderInput={(params)=><TextField style={{width: "200px"}} {...params} label="Colony id"/>}
@@ -805,7 +836,51 @@ function CreateInspectionsForm() {
                   <FormGroup row style={{ margin: 20 }}>
                     <Varroa onChange={formik.handleChange} name="varoa"/>
                     <FormGroup row style={{ marginLeft: 20 }}>
-                      <NaturalVarroa onChange={formik.handleChange} />
+                    <Grid containter direction="row">
+          <Typography
+            variant="caption1"
+            sx={{ textTransform: "uppercase", letterSpacing: 2 }}
+          >
+            natural fallen varroa
+          </Typography>
+  
+          <InputLabel sx={{ mb: 1, mt: 3 }}>Total number of varroa</InputLabel>
+  
+          <Grid container direction="row">
+            <FormControl sx={{ width: "25ch", mb: 5 }} variant="outlined">
+              <OutlinedInput
+                value={num1}
+                onChange={_changeNum1}
+              />
+            </FormControl>
+          </Grid>
+  
+          <InputLabel sx={{ mb: 1, mt: 3 }}>Total number of days</InputLabel>
+  
+          <Grid container direction="row">
+            <FormControl sx={{ width: "25ch", mb: 5 }} variant="outlined">
+              <OutlinedInput
+                value={num2}
+                onChange={_changeNum2}
+              />
+            </FormControl>
+          </Grid>
+  
+          <Typography
+            sx={{
+              mt: 2,
+              fontFamily: "Helvetica",
+              fontSize: 15,
+              textTransform: "uppercase",
+            }}
+          >
+            Number of fallen varroa per day
+          </Typography>
+  
+          <Typography name="natural_varoa" onChange={formik.handleChange} sx={{ width: "25ch", mb: 5 }}>{result}</Typography>
+            
+         
+        </Grid>
                     </FormGroup>
                   </FormGroup>
                 </AccordionDetails>
