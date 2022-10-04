@@ -71,11 +71,11 @@ function CreateInspectionsForm() {
   
   const {colonies} = useSelector((state) => state.colonies);
   const apiary =[...new Set(colonies.map((item)=>item.apiary_id))];
-  
+  const setFieldValue = useFormikContext();
   const [num1, setNum1]= React.useState(0);
   const [num2, setNum2]= React.useState(0);
   const [result, setResult]=React.useState(0);
- const setFieldValue =useFormikContext();
+ 
   const _changeNum1=(e)=>{
       if(e.target.validity.valid){
           
@@ -102,11 +102,7 @@ function CreateInspectionsForm() {
     setColony(colony)
     
   };
-  React.useEffect (()=>{
-    if(num1!==0 && num2 !==0 ){
-      setFieldValue(result)
-    }
-  }, [])
+  
 
   React.useEffect (() => {
     setLoading(true);
@@ -185,12 +181,12 @@ function CreateInspectionsForm() {
       number_brood_combs,
       queen_status,
       queen_loss_signs,
-    eggs,
-    larvae,
-    bee_pupae,
-    adult_queen,
-    cells,
-    queen_replacement,
+      eggs,
+      larvae,
+      bee_pupae,
+      adult_queen,
+      cells,
+      queen_replacement,
       queen_status_change_reason,
       swarming_tendency,
       varoa,
@@ -219,12 +215,12 @@ function CreateInspectionsForm() {
         number_brood_combs,
         queen_status,
         queen_loss_signs,
-    eggs,
-    larvae,
-    bee_pupae,
-    adult_queen,
-    cells,
-    queen_replacement,
+        eggs,
+        larvae,
+        bee_pupae,
+        adult_queen,
+        cells,
+        queen_replacement,
         queen_status_change_reason,
         swarming_tendency,
         varoa,
@@ -835,6 +831,8 @@ function CreateInspectionsForm() {
                 <AccordionDetails>
                   <FormGroup row style={{ margin: 20 }}>
                     <Varroa onChange={formik.handleChange} name="varoa"/>
+
+
                     <FormGroup row style={{ marginLeft: 20 }}>
                     <Grid containter direction="row">
           <Typography
@@ -858,10 +856,11 @@ function CreateInspectionsForm() {
           <InputLabel sx={{ mb: 1, mt: 3 }}>Total number of days</InputLabel>
   
           <Grid container direction="row">
-            <FormControl sx={{ width: "25ch", mb: 5 }} variant="outlined">
+            <FormControl  sx={{ width: "25ch", mb: 5 }} variant="outlined">
               <OutlinedInput
                 value={num2}
                 onChange={_changeNum2}
+                
               />
             </FormControl>
           </Grid>
@@ -877,7 +876,7 @@ function CreateInspectionsForm() {
             Number of fallen varroa per day
           </Typography>
   
-          <Typography name="natural_varoa" onChange={formik.handleChange} sx={{ width: "25ch", mb: 5 }}>{result}</Typography>
+          <Field name="natural_varoa" value={result} onChange={(e)=>{setFieldValue("natural_varoa", e.target.value)}} ></Field>
             
          
         </Grid>
