@@ -22,12 +22,15 @@ const QueenTable = (props) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {queen} = useSelector((state => state.queen));
-
-  const {colonies} = useSelector((state=>state.colonies))
+  const {queen} = useSelector((state) => state.queen);
   
+  const {colonies} = useSelector((state)=>state.colonies)
+ 
   const singleColony= colonies && colonies.filter(item=>item.colony_id===parseInt(window.localStorage.getItem("colonyId")))[0]
-
+  //console.log("colonies",colonies)
+  //console.log("sct",singleColony)
+ console.log("queen",queen)
+console.log()
   useEffect (() => {
     setLoading(true);
   dispatch(getQueen())
@@ -37,9 +40,9 @@ const QueenTable = (props) => {
       setLoading(false); 
     });
   },[]);
-
+  
    const handleEdit = (queen) => {
-    window.localStorage.setItem('queen', queen.queen_id);
+    window.localStorage.setItem('queen',queen.queen_id);
     // dispatch(updateColony(colonies))
     // .unwrap()
   // .then(() => {
@@ -51,8 +54,8 @@ const QueenTable = (props) => {
    }
 
   
-  const navigateToColonies = (queen_id) => {
-    window.localStorage.setItem('queen_id', queen_id);
+  const navigateToColonies = (queen) => {
+    window.localStorage.setItem('queen_id', queen.queen_id);
     return navigate('/inspections-page');
   }
 
@@ -93,8 +96,9 @@ const QueenTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {queen && queen.map((row) => (
-            <TableRow key={row.name}>
+        { queen&& queen.map ((row)=>(
+            <TableRow key={row}>
+              
               <TableCell align='left'>{singleColony.apiary_id}</TableCell>
              <TableCell align='left'>{singleColony.gondola_id}</TableCell>
              <TableCell align='left'>{singleColony.colony_id}</TableCell>
@@ -109,7 +113,7 @@ const QueenTable = (props) => {
                   <EditIcon color='primary' fontSize="large" />
                 </Button>
               </TableCell>
-              
+               
                <TableCell align="left" style={{width: '5%'}}>
                 <Button onClick={e => navigateToColonies(row.queen_id)}>
                 <AddBoxIcon sx={{ color: green[500] }} fontSize="large"/>
@@ -121,8 +125,9 @@ const QueenTable = (props) => {
                 </Button>
               </TableCell>
              
+         
             </TableRow>
-          ))}
+           ))}
         </TableBody>
       </Table>
     </TableContainer>

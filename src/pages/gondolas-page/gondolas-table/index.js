@@ -28,7 +28,7 @@ const GondolasTable = (props) => {
   const { gondolas } = useSelector((state => state.gondolas));
   const { airpays } = useSelector((state => state.airpays));
   
-  const apiary= useSelector((state=>state.apiary))
+  //ovde e problemot za refresh
   const singleApiary = airpays && airpays.filter(item=> item.apiary_id===parseInt(window.localStorage.getItem("apiaryId")))[0];
   
   useEffect (() => {
@@ -43,14 +43,18 @@ const GondolasTable = (props) => {
   },[]);
 
   useEffect (() => {
-    setLoading(true);
+   
   dispatch(getAirpays())
     .unwrap()
     .then(() => {
+      
     })
     .catch(() => {
-      setLoading(false);
+      
+        setLoading(false);
+      
     });
+    
   },[]);
 
   const handleEdit = (apiary) => {
@@ -87,13 +91,14 @@ const GondolasTable = (props) => {
   };
 
   return (
+    
     <Grid style={{ marginTop: '70px' }}>
          < TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="caption table">
         <TableHead>
           <TableRow>
-            <TableCell align="left">Apiary</TableCell>
-            <TableCell align="left">Id&nbsp;</TableCell>
+            <TableCell align="left">Apiary Id</TableCell>
+            <TableCell align="left">Gondola Id&nbsp;</TableCell>
             <TableCell align="left">Number of colonies&nbsp;</TableCell>
             </TableRow>
             </TableHead>
@@ -102,7 +107,7 @@ const GondolasTable = (props) => {
             <TableRow key={row.name}>
                 <TableCell align="left">{row.apiary_id}</TableCell>
                 <TableCell align="left">{row.gondola_id}</TableCell>
-                <TableCell align="left">{singleApiary.no_colonies}</TableCell>
+                <TableCell align="left">{row.no_colonies}</TableCell>
                <TableCell align="left" style={{width: '5%'}}>
                 <Button onClick={e => handleEdit(row)}>
                   <EditIcon color='primary' fontSize="large" />

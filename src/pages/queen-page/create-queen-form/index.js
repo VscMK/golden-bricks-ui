@@ -33,9 +33,9 @@ function CreateQueenForm(){
   let navigate = useNavigate();
   const {colonies}= useSelector((state)=>state.colonies)
   
-  const singleColony= colonies && colonies.filter(item=>item.colony_id===parseInt(window.localStorage.getItem('colonyId')))[0]
-  console.log(colonies)
-
+  const singleColonyId= colonies && colonies.filter(item=>item.colony_id===parseInt(window.localStorage.getItem('colonyId')))[0]
+  //console.log("sc", singleColonyId)
+  //console.log("colonies",colonies)
   const [value, setValue] = React.useState(null);
 
   
@@ -77,12 +77,12 @@ function CreateQueenForm(){
 
   const INITIAL_VALUES={
     
-    apiary_id: singleColony.apiary_id,
-    gondola_id: singleColony.gondola_id ,
-    colony_id: singleColony.colony_id,
+    apiary_id: singleColonyId.apiary_id,
+    gondola_id: singleColonyId.gondola_id ,
+    colony_id: singleColonyId.colony_id,
     color_plate: "",
-    number_on_plate: 2,
-    queen_number: "MK-9-1-275-2019",
+    number_on_plate: "",
+    queen_number: "MK-9-1-113-2019",
     clipped: "",
     mating_status: "",
     marked: ""

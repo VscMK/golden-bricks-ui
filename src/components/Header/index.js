@@ -39,42 +39,49 @@ const Header = (props) => {
         toolbar: {
           backgroundColor: '#f8b133',
           color: 'rgba(0,0,0,.87)',
+          height: 60
         },
         root: {
             display: 'flex',
         },
+        rightAlign: {
+          marginLeft: "auto",
+          marginRight: 20,
+          marginTop:5
+          
+        }
       });
     const classes = useStyles();
     
     
     return (
-        <div style={{display: 'flex'}}>
+        <div className={classes.root}>
            {/* <DrawerComponent openDrawer={openDrawer} /> */}
-           <AppBar className={classes.toolbar} position='absolute'>
-               <Toolbar>
-                 <Button onClick={navigateToProfilePage}>
-                   <Typography>
-                   <Box sx={{ fontWeight: 'bold', m: 1, letterSpacing: 5}}>
-                       GOLDEN BRICKS
-                   </Box>
-                   </Typography>
-                   </Button>
+           <AppBar className={classes.toolbar} position="absolute">
+           
+                 
+                
                    <Tabs value={selectedTab}
-                   centered
+                centered
                    indicatorColor='primary'
                    onChange={(e, value) => setSelectedTab(value)}
                    >
-                     <Tab label='APIARYS' href="/airpays-page" />
-                     <Tab label='USERS' href="/users-page"/>
+                    <Tab label="GOLDEN BRICKS" href="/profile" style={{ color: 'black', fontWeight: 'bolder', letterSpacing: 5}} />
+                     <Tab label='APIARY' href="/airpays-page" />
+                     <Tab label='GONDOLA' href="/gondolas-page"/>
                      <Tab label="COLONY" href="/colony-page"/>
                      <Tab label="QUEEN" href="/queen-page"/>
                      <Tab label='INSPECTIONS' href="/inspections-page"/>
+                     <Tab label='USERS'  href="/users-page" className={classes.rightAlign}/>
+                  
+                    
                    </Tabs>
                    <PowerSettingsNewIcon 
-                   fontSize='large'sx={{ fontSize: 40, marginLeft: 'auto' }}
+                   fontSize='large'sx={{ fontSize: 40, marginLeft: 'auto', paddingRight: '20px', marginTop:"-45px" }}
                    onClick={handleLogout}
                    />
-               </Toolbar>
+                 
+               
            </AppBar>
            </div>
     );

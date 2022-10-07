@@ -37,7 +37,7 @@ function CreateColonyForm() {
   const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
   let navigate = useNavigate();
-  const colonies = useSelector((state) => state.colonies);
+  const {colonies} = useSelector((state) => state.colonies);
   const {gondolas} = useSelector((state) => state.gondolas);
   const singleGondola= gondolas && gondolas.filter(item=>item.gondola_id===parseInt(window.localStorage.getItem("gondolaId")))[0]
   
@@ -77,14 +77,14 @@ function CreateColonyForm() {
   }, []);
 
   
-  const colony=window.localStorage.getItem("colony")
-  const colonyToUpdate=colonies.find(c=>c.colony_id===parseInt(colony))
+  const colony=window.localStorage.getItem("colonies")
+  const colonyToUpdate=colonies.filter(c=>c.colony_id===parseInt(colony))
   const INITIAL_VALUES = {
     id: colony,
     apiaryId: singleGondola.apiary_id,
     gondolaId: singleGondola.gondola_id,
     noBoxes: colonyToUpdate.noBoxes,
-    queen: "Y",
+    queen: colonyToUpdate.queen,
     queenAlarm: colonyToUpdate.queenAlarm,
     
   };
@@ -108,16 +108,14 @@ function CreateColonyForm() {
       .unwrap()
       .then(() => {
         window.localStorage.removeItem('colony');
-          window.location.reload();
+          //window.location.reload();
       })
       .catch(() => {
         setLoading(false);
       });
-    
+      return navigate("/colony-page");
   };
-  const navigateToQueen = () => {
-    return navigate("/queen-page");
-  };
+  
 
   return (
     <Container>
@@ -137,8 +135,11 @@ function CreateColonyForm() {
                 )}
                 colony
               </SaveButton>
-
+              
               <div style={{ margin: 25 }}>
+              <Typography variant='h4' component='h2' gutterBottom >
+                      Update colony: 
+                    </Typography>
                 <Field
                   name="noBoxes"
                   placeholder="Number of Boxes"
@@ -184,22 +185,33 @@ function CreateColonyForm() {
                   </FormControl>
                 </Grid>
 
+               
                 <Grid item xs={3} style={{ marginTop: 20 }}>
                   <FormControl>
                     <FormLabel>Queen</FormLabel>
-                    <Field component={IconButton} row>
+
+                    <Field component={RadioGroup} name="queen" row>
                       <FormControlLabel
                         value="Y"
                         control={
                           <Radio
-                            onClick={(e) => navigateToQueen()}
                             onChange={formik.handleChange}
-                            icon={<EmojiNatureIcon style={{ fontSize: 60 }} />}
-                            checkedIcon={
-                              <EmojiNatureIcon style={{ fontSize: 60 }} />
-                            }
+                            icon={<CheckBoxIcon />}
+                            checkedIcon={<CheckBoxIcon />}
                           />
                         }
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="N"
+                        control={
+                          <Radio
+                            onChange={formik.handleChange}
+                            icon={<DisabledByDefaultRoundedIcon />}
+                            checkedIcon={<DisabledByDefaultRoundedIcon />}
+                          />
+                        }
+                        label="No"
                       />
                     </Field>
                   </FormControl>

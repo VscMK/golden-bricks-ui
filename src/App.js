@@ -17,6 +17,8 @@ import QueenPage from './pages/queen-page';
 
 import UpdateColonyForm from './pages/update-colony-page/update-colony-form';
 import CreateQueenForm from './pages/queen-page/create-queen-form';
+import GondolasTable from './pages/gondolas-page/gondolas-table';
+import CreateGondola from './pages/gondolas-page/create-gondola';
 //import CreateGondolaForm from './pages/create-gondola-page/create-gondola-form';
 
 function App() {
@@ -33,7 +35,8 @@ function App() {
         <Route path="/colony-page" element={<ColonyPage/>}/>
         <Route path='/create-apiary' element={<CreateAirpayForm />} />
         <Route path='/update-apiary' element={<UpdateApiaryForm />} />
-        <Route path='/gondolas-page' element={<GondolasPage />} />  
+        <Route path='/gondolas-page' element={<GondolasPage />} />
+        <Route path='/create-gondola' element={<CreateGondola/>}/>  
         <Route path='/create-colony' element={<CreateColonyForm/>}/>
         <Route path='/queen-page' element={<QueenPage/>}/>
         <Route path='/create-queen' element={<CreateQueenForm/>}/>

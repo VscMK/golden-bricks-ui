@@ -40,6 +40,7 @@ function CreateColonyForm() {
   const {gondolas} = useSelector((state) => state.gondolas);
   const singleGondola= gondolas && gondolas.filter(item=>item.gondola_id===parseInt(window.localStorage.getItem("gondolaId")))[0]
   
+  
   const theme = createTheme({
     palette: {
       primary: {
@@ -82,7 +83,7 @@ function CreateColonyForm() {
     apiaryId: singleGondola.apiary_id,
     gondolaId: singleGondola.gondola_id,
     noBoxes: "",
-    queen: "Y",
+    queen: "",
     queenAlarm: "",
     
   };
@@ -111,9 +112,7 @@ function CreateColonyForm() {
       });
     return navigate("/colony-page");
   };
-  const navigateToQueen = () => {
-    return navigate("/queen-page");
-  };
+  
 
   return (
     <Container>
@@ -183,19 +182,29 @@ function CreateColonyForm() {
                 <Grid item xs={3} style={{ marginTop: 20 }}>
                   <FormControl>
                     <FormLabel>Queen</FormLabel>
-                    <Field component={IconButton} row>
+
+                    <Field component={RadioGroup} name="queen" row>
                       <FormControlLabel
                         value="Y"
                         control={
                           <Radio
-                            onClick={(e) => navigateToQueen()}
                             onChange={formik.handleChange}
-                            icon={<EmojiNatureIcon style={{ fontSize: 60 }} />}
-                            checkedIcon={
-                              <EmojiNatureIcon style={{ fontSize: 60 }} />
-                            }
+                            icon={<CheckBoxIcon />}
+                            checkedIcon={<CheckBoxIcon />}
                           />
                         }
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="N"
+                        control={
+                          <Radio
+                            onChange={formik.handleChange}
+                            icon={<DisabledByDefaultRoundedIcon />}
+                            checkedIcon={<DisabledByDefaultRoundedIcon />}
+                          />
+                        }
+                        label="No"
                       />
                     </Field>
                   </FormControl>

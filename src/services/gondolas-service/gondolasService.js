@@ -21,9 +21,9 @@ const getGondolas = () => {
     });
 };
 
-const addGondola = (apiaryId) => {
+const addGondola = (apiaryId,no_colonies) => {
     return axios
-      .post(API_URL + 'gondola/create', {apiaryId})
+      .post(API_URL + 'gondola/create', {apiaryId,no_colonies})
       .then((response) => {
         return response.data;
       });

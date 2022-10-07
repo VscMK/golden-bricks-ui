@@ -17,9 +17,15 @@ function QueenPage () {
   const [loading, setLoading] = React.useState(false);
   const dispatch= useDispatch();
   const navigate = useNavigate();
+  const {colonies} = useSelector((state)=>state.colonies)
+  
+  const singleColonyId = parseInt(window.localStorage.getItem('colonyId'))
+  //console.log("scp",singleColonyId)
 
-  const navigateToColonies = (colony_id) => {
+
+  const navigateToQueen = (colony_id) => {
     window.localStorage.setItem('colonyId', colony_id);
+   
     return navigate('/create-queen');
   }
   const useStyles = makeStyles({
@@ -33,11 +39,7 @@ function QueenPage () {
     }
   });
   const classes = useStyles();
-  const {colonies} = useSelector((state)=>state.colonies)
   
-  const singleColonyId = parseInt(window.localStorage.getItem('colonyId'))
-
-console.log("da",colonies)
 
   React.useEffect (() => {
     setLoading(true);
@@ -57,7 +59,7 @@ console.log("da",colonies)
           <Button  
           className={classes.btn}
           onClick={() => {
-            return navigateToColonies(singleColonyId);
+            return navigateToQueen(singleColonyId);
           }} >
             + new Queen
           </Button>

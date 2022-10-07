@@ -876,7 +876,7 @@ function CreateInspectionsForm() {
             Number of fallen varroa per day
           </Typography>
   
-          <Field name="natural_varoa" value={result} onChange={(e)=>{setFieldValue("natural_varoa", e.target.value)}} ></Field>
+          <Field name="natural_varoa" value={result} onChange={setResult(result)} ></Field>
             
          
         </Grid>

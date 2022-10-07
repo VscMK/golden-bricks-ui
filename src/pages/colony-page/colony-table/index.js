@@ -22,8 +22,10 @@ const ColoniesTable = (props) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { colonies} = useSelector((state => state.colonies));
-
+  const {colonies}=useSelector((state)=>state.colonies)
+  const { gondolas } = useSelector((state) => state.gondolas);
+  const singleGondola= gondolas && gondolas.filter(item=>item.gondola_id===parseInt(window.localStorage.getItem("gondolaId")))[0]
+  console.log("sg",colonies)
 
 
   useEffect (() => {
@@ -49,8 +51,9 @@ const ColoniesTable = (props) => {
    }
 
   
-  const navigateToColonies = (colonyId) => {
-    window.localStorage.setItem('colony_id', colonyId);
+  const navigateToColonies = (colony_id) => {
+    window.localStorage.setItem('colonyId', colony_id);
+    
     return navigate('/queen-page');
   }
 
@@ -80,7 +83,7 @@ const ColoniesTable = (props) => {
           <TableRow>
             <TableCell align='left'>Apiary ID</TableCell>
             <TableCell align='left'>Gondola ID</TableCell>
-            <TableCell align='left'>Queen ID</TableCell>
+            <TableCell align='left'>Queen</TableCell>
             <TableCell align="left">Number of boxes</TableCell>
             <TableCell align="left">Queen alarm&nbsp;</TableCell>
             

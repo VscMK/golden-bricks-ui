@@ -15,12 +15,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function ColonyPage () {
   const [loading, setLoading] = React.useState(false);
-  
+  const { gondolas } = useSelector((state) => state.gondolas);
   const navigate = useNavigate();
+
   const navigateToColonies = (gondolaId) => {
     window.localStorage.setItem('gondolaId', gondolaId);
     return navigate('/create-colony');
   }
+  
   const useStyles = makeStyles({
     btn: {
       fontSize: 15,
@@ -34,10 +36,11 @@ function ColonyPage () {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const { gondolas } = useSelector((state => state.gondolas));
+  
 
   const singleGondolaId = parseInt(window.localStorage.getItem("gondolaId"))
-console.log(gondolas)
+ 
+  
   
   React.useEffect (() => {
     setLoading(true);

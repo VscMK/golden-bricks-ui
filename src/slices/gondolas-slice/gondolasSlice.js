@@ -18,9 +18,9 @@ export const getGondolas = createAsyncThunk(
 
   export const addGondola = createAsyncThunk(
     "gondolas/addGondola",
-    async ({ id }, thunkAPI) => {
+    async ({ id,no_colonies }, thunkAPI) => {
       try {
-        const response = await GondolaService.addGondola(id);
+        const response = await GondolaService.addGondola(id,no_colonies);
         return response.data;
      } catch (error) {
       return error?.response;   
